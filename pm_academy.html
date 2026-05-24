@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PM Academy — Pricilla Souza</title>
+<title>Product Manager Pricilla S. Cruz</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
@@ -944,8 +944,8 @@
 <!-- SIDEBAR -->
 <div class="sidebar">
   <div class="sidebar-logo">
-    <div class="logo-title">PM Academy</div>
-    <div class="logo-sub">Plataforma de Estudos</div>
+    <div class="logo-title">Pricilla S. Cruz</div>
+    <div class="logo-sub">Product Manager</div>
   </div>
 
   <div class="sidebar-progress">
@@ -1025,7 +1025,7 @@
 <div class="main">
   <div class="topbar">
     <div class="breadcrumb">
-      <span>PM Academy</span>
+      <span>Product Manager Pricilla S. Cruz</span>
       <i class="ti ti-chevron-right" style="font-size:12px"></i>
       <span class="active-crumb" id="breadcrumb-active">Dashboard</span>
     </div>
@@ -1047,7 +1047,7 @@
           <div class="stat-item"><div class="stat-num">12</div><div class="stat-label">Módulos no total</div></div>
           <div class="stat-item"><div class="stat-num">80+</div><div class="stat-label">Conceitos-chave</div></div>
           <div class="stat-item"><div class="stat-num" id="hero-done">0</div><div class="stat-label">Módulos concluídos</div></div>
-          <div class="stat-item"><div class="stat-num">10</div><div class="stat-label">Flashcards disponíveis</div></div>
+          <div class="stat-item"><div class="stat-num">30</div><div class="stat-label">Flashcards disponíveis</div></div>
         </div>
       </div>
 
@@ -1949,9 +1949,37 @@
       <div class="hero" style="padding:32px 48px;margin-bottom:32px">
         <div class="hero-eyebrow">Modo de Estudo</div>
         <div class="hero-title" style="font-size:32px">Flashcards <span>Interativos</span></div>
-        <div class="hero-desc" style="margin-bottom:0">Clique no cartão para ver a resposta. Marque como fácil ou difícil para controlar sua revisão.</div>
+        <div class="hero-desc" style="margin-bottom:0">Escolha um nível e clique no cartão para ver a resposta. Cartas são embaralhadas a cada sessão.</div>
       </div>
-      <div style="max-width:640px;margin:0 auto">
+
+      <!-- Deck Selector -->
+      <div id="fc-deck-selector" style="max-width:640px;margin:0 auto 32px">
+        <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:16px">Escolha o deck</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+          <div onclick="selectDeck('facil')" style="background:rgba(90,155,107,0.08);border:1px solid rgba(90,155,107,0.3);border-radius:12px;padding:20px;cursor:pointer;transition:all 0.2s;text-align:center" onmouseover="this.style.borderColor='#5A9B6B'" onmouseout="this.style.borderColor='rgba(90,155,107,0.3)'">
+            <div style="font-size:22px;margin-bottom:8px">🟢</div>
+            <div style="font-family:var(--font-display);font-size:18px;color:#5A9B6B;margin-bottom:4px">Fácil</div>
+            <div style="font-size:12px;color:var(--muted)">10 cartões · Fundamentos</div>
+          </div>
+          <div onclick="selectDeck('intermediario')" style="background:rgba(201,169,110,0.08);border:1px solid rgba(201,169,110,0.2);border-radius:12px;padding:20px;cursor:pointer;transition:all 0.2s;text-align:center" onmouseover="this.style.borderColor='#C9A96E'" onmouseout="this.style.borderColor='rgba(201,169,110,0.2)'">
+            <div style="font-size:22px;margin-bottom:8px">🟡</div>
+            <div style="font-family:var(--font-display);font-size:18px;color:var(--gold);margin-bottom:4px">Intermediário</div>
+            <div style="font-size:12px;color:var(--muted)">10 cartões · Frameworks</div>
+          </div>
+          <div onclick="selectDeck('dificil')" style="background:rgba(216,90,48,0.08);border:1px solid rgba(216,90,48,0.2);border-radius:12px;padding:20px;cursor:pointer;transition:all 0.2s;text-align:center" onmouseover="this.style.borderColor='#D85A30'" onmouseout="this.style.borderColor='rgba(216,90,48,0.2)'">
+            <div style="font-size:22px;margin-bottom:8px">🔴</div>
+            <div style="font-family:var(--font-display);font-size:18px;color:#D85A30;margin-bottom:4px">Difícil</div>
+            <div style="font-size:12px;color:var(--muted)">10 cartões · AI PM & Avançado</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Study Area -->
+      <div id="fc-study-area" style="max-width:640px;margin:0 auto;display:none">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+          <button onclick="showDeckSelector()" style="background:transparent;border:1px solid #3A3A3A;color:var(--muted);padding:6px 14px;border-radius:6px;font-size:12px;cursor:pointer;font-family:var(--font-body)">← Trocar deck</button>
+          <div id="fc-deck-badge" style="font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;border-radius:10px;color:#0E0E0E;background:#5A9B6B">🟢 Fácil</div>
+        </div>
         <div class="flashcard-controls">
           <div class="fc-counter">Cartão <span id="fc-current">1</span> de <span id="fc-total">10</span></div>
           <div class="fc-buttons">
@@ -1981,7 +2009,7 @@
           </div>
         </div>
         <div style="background:var(--onyx3);border:1px solid #2E2E2E;border-radius:12px;padding:20px;margin-top:24px">
-          <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:16px">Todos os flashcards</div>
+          <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:16px">Todos os cartões do deck</div>
           <div id="cards-list" style="display:flex;flex-direction:column;gap:8px"></div>
         </div>
       </div>
@@ -1992,9 +2020,37 @@
       <div class="hero" style="padding:32px 48px;margin-bottom:32px">
         <div class="hero-eyebrow">Avaliação de Conhecimento</div>
         <div class="hero-title" style="font-size:32px">Quiz <span>Interativo</span></div>
-        <div class="hero-desc" style="margin-bottom:0">Teste seu entendimento com perguntas contextualizadas para o universo de produto e IA.</div>
+        <div class="hero-desc" style="margin-bottom:0">Perguntas sorteadas a cada jogada. Escolha o nível e teste seus conhecimentos.</div>
       </div>
-      <div style="max-width:680px;margin:0 auto">
+
+      <!-- Quiz Level Selector -->
+      <div id="quiz-level-selector" style="max-width:680px;margin:0 auto 32px">
+        <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:16px">Escolha o nível</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+          <div onclick="startQuiz('facil')" style="background:rgba(90,155,107,0.08);border:1px solid rgba(90,155,107,0.3);border-radius:12px;padding:24px;cursor:pointer;transition:all 0.2s;text-align:center" onmouseover="this.style.borderColor='#5A9B6B'" onmouseout="this.style.borderColor='rgba(90,155,107,0.3)'">
+            <div style="font-size:28px;margin-bottom:12px">🟢</div>
+            <div style="font-family:var(--font-display);font-size:20px;color:#5A9B6B;margin-bottom:6px">Fácil</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.5">Conceitos fundamentais<br>8 questões sortidas de 12</div>
+          </div>
+          <div onclick="startQuiz('medio')" style="background:rgba(201,169,110,0.08);border:1px solid rgba(201,169,110,0.2);border-radius:12px;padding:24px;cursor:pointer;transition:all 0.2s;text-align:center" onmouseover="this.style.borderColor='#C9A96E'" onmouseout="this.style.borderColor='rgba(201,169,110,0.2)'">
+            <div style="font-size:28px;margin-bottom:12px">🟡</div>
+            <div style="font-family:var(--font-display);font-size:20px;color:var(--gold);margin-bottom:6px">Médio</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.5">Frameworks e aplicação<br>8 questões sortidas de 12</div>
+          </div>
+          <div onclick="startQuiz('dificil')" style="background:rgba(216,90,48,0.08);border:1px solid rgba(216,90,48,0.2);border-radius:12px;padding:24px;cursor:pointer;transition:all 0.2s;text-align:center" onmouseover="this.style.borderColor='#D85A30'" onmouseout="this.style.borderColor='rgba(216,90,48,0.2)'">
+            <div style="font-size:28px;margin-bottom:12px">🔴</div>
+            <div style="font-family:var(--font-display);font-size:20px;color:#D85A30;margin-bottom:6px">Difícil</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.5">AI PM & Cenários avançados<br>8 questões sortidas de 12</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quiz Play Area -->
+      <div id="quiz-play-area" style="max-width:680px;margin:0 auto;display:none">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+          <button onclick="showQuizSelector()" style="background:transparent;border:1px solid #3A3A3A;color:var(--muted);padding:6px 14px;border-radius:6px;font-size:12px;cursor:pointer;font-family:var(--font-body)">← Trocar nível</button>
+          <div id="quiz-level-badge" style="font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;border-radius:10px;color:#0E0E0E;background:#5A9B6B">🟢 Fácil</div>
+        </div>
         <div class="quiz-container" id="quiz-container">
           <div class="quiz-header">
             <div class="quiz-counter">Questão <span id="q-current">1</span> de <span id="q-total">8</span></div>
@@ -2012,8 +2068,8 @@
           <div class="concept-card" style="text-align:center;padding:48px">
             <div style="font-family:var(--font-display);font-size:56px;color:var(--gold);margin-bottom:8px" id="result-score">0/8</div>
             <div style="font-size:16px;color:var(--muted);margin-bottom:24px" id="result-msg">Calculando...</div>
-            <button class="btn-gold" onclick="restartQuiz()">Refazer quiz</button>
-            <button class="btn-outline" onclick="showScreen('home')" style="margin-left:12px">Voltar ao início</button>
+            <button class="btn-gold" onclick="restartQuiz()">Jogar novamente →</button>
+            <button class="btn-outline" onclick="showQuizSelector()" style="margin-left:12px">Trocar nível</button>
           </div>
         </div>
       </div>
@@ -2023,226 +2079,345 @@
 </div>
 
 <script>
-const flashcards = [
-  { q: "O que é Product Market Fit?", a: "PMF é o ponto em que seu produto resolve um problema real de um mercado real, de forma que os usuários não conseguem viver sem ele. Sinal clássico: 40% ficariam 'muito desapontados' sem o produto (Sean Ellis Test)." },
-  { q: "Qual a diferença entre WOW Moment e AHA Moment?", a: "WOW Moment: primeiro encantamento emocional (ocorre no onboarding). AHA Moment: momento em que o usuário entende o valor real do produto. WOW acontece antes, AHA é o que converte e retém." },
-  { q: "O que é RAG em IA?", a: "Retrieval Augmented Generation: técnica que faz o LLM buscar informações em fontes externas antes de responder, reduzindo alucinações e permitindo usar dados atualizados ou proprietários." },
-  { q: "O que diferencia KPI de métrica de vaidade?", a: "KPIs conectam comportamento do usuário com resultado de negócio e informam decisões. Métricas de vaidade parecem boas (ex: pageviews sem correlação) mas não guiam ação estratégica." },
-  { q: "O que é Product Discovery?", a: "Processo contínuo de entender problemas do usuário, validar hipóteses e encontrar soluções antes de construir. Garante que você está construindo a coisa certa, para a pessoa certa." },
-  { q: "Qual a diferença entre AI-first e AI-enhanced?", a: "AI-first: IA é o núcleo do produto — sem ela, o produto não existe. AI-enhanced: IA melhora um produto existente que funciona sem ela. Ex: ChatGPT é AI-first; Gmail Smart Reply é AI-enhanced." },
-  { q: "O que são Embeddings em IA?", a: "Representações numéricas de texto (vetores) que capturam significado semântico. Permitem busca por similaridade — base do RAG e de sistemas de recomendação semântica." },
-  { q: "O que é Unit Economics?", a: "Análise da rentabilidade por unidade de negócio (geralmente por cliente: LTV vs CAC). Fundamental para entender se o modelo de negócio é sustentável antes de escalar." },
-  { q: "O que é Working Backwards?", a: "Metodologia da Amazon: escreva o press release do lançamento antes de qualquer linha de código. Define o 'por quê' e a experiência do cliente antes do 'como' técnico." },
-  { q: "O que é Red Teaming em IA?", a: "Processo de testar o modelo adversarialmente — tentando explorar falhas, vieses e comportamentos inesperados antes do lançamento. Essencial em produtos financeiros e regulados." }
-];
+// ===== FLASHCARDS =====
+const flashcardDecks = {
+  facil: [
+    { q: "O que é um Product Manager?", a: "Profissional responsável por definir a visão, estratégia e roadmap de um produto. Atua como ponte entre negócio, tecnologia e design, priorizando o que construir para gerar mais valor ao usuário e à empresa." },
+    { q: "O que é Business Model Canvas?", a: "Ferramenta visual com 9 blocos que descreve como uma empresa cria, entrega e captura valor: Segmentos de clientes, Proposta de Valor, Canais, Relacionamentos, Receitas, Recursos-chave, Atividades-chave, Parcerias e Estrutura de Custos." },
+    { q: "O que é Product Market Fit?", a: "Ponto em que o produto resolve um problema real de um mercado real de forma que os usuários não conseguem viver sem ele. Sinal clássico: 40% ficariam 'muito desapontados' sem o produto (Sean Ellis Test)." },
+    { q: "O que são KPIs de produto?", a: "Indicadores-chave de desempenho (Key Performance Indicators) que medem o progresso em direção às metas estratégicas. Exemplos: DAU, retenção D30, NPS, taxa de conversão, tempo de ativação." },
+    { q: "O que é um Roadmap de produto?", a: "Plano estratégico de alto nível que comunica a visão e direção do produto ao longo do tempo. Não é uma lista de features, mas uma representação de objetivos e como o produto vai evoluir para alcançá-los." },
+    { q: "O que é Product Discovery?", a: "Processo contínuo para identificar problemas reais dos usuários e validar soluções antes de construí-las. Reduz o risco de entregar a coisa errada ao minimizar suposições com pesquisa, protótipos e testes." },
+    { q: "O que é Lean Canvas?", a: "Adaptação do Business Model Canvas focada em startups, criada por Ash Maurya. Substitui parceiros e atividades-chave por Problema, Solução e Vantagem Injusta, com foco na validação rápida de hipóteses de negócio." },
+    { q: "O que é NPS (Net Promoter Score)?", a: "Métrica de lealdade do cliente baseada na pergunta: 'De 0 a 10, quanto você recomendaria nossa empresa?' Promotores (9-10) menos Detratores (0-6) = NPS. Score >50 é excelente, <0 é crítico." },
+    { q: "O que é LTV (Lifetime Value)?", a: "Valor total que um cliente gera durante todo o relacionamento com a empresa. Fórmula básica: LTV = Ticket Médio × Frequência de Compra × Tempo de Retenção. Fundamental para avaliar a saúde do negócio." },
+    { q: "O que é CAC (Customer Acquisition Cost)?", a: "Custo total para adquirir um novo cliente, incluindo gastos com marketing, vendas e operações. CAC = Investimento Total / Clientes Adquiridos. LTV/CAC > 3 é referência saudável para SaaS." }
+  ],
+  intermediario: [
+    { q: "O que é ICE Score e quando usar?", a: "Framework de priorização: Impact (impacto esperado) × Confidence (confiança na estimativa) × Ease (facilidade de implementação). Ideal para priorizar rapidamente com dados limitados. Cada critério de 1-10." },
+    { q: "O que é RICE Score?", a: "Priorização com quatro fatores: Reach (quantos usuários) × Impact (impacto por usuário) × Confidence (% de certeza) / Effort (semanas-pessoa). Mais robusto que ICE por incluir o alcance explicitamente." },
+    { q: "Quais são os 4 riscos de produto segundo Marty Cagan?", a: "1. Risco de Valor: o produto resolve um problema que o usuário realmente tem? 2. Risco de Usabilidade: o usuário consegue usar? 3. Risco de Viabilidade Técnica: conseguimos construir? 4. Risco de Viabilidade de Negócio: faz sentido para a empresa?" },
+    { q: "O que é Working Backwards (Amazon)?", a: "Metodologia Amazon que começa pelo cliente: escreve-se primeiro a press release do produto e o FAQ antes de construí-lo. Força o time a articular o valor para o cliente de forma clara antes de investir em desenvolvimento." },
+    { q: "O que é Unit Economics?", a: "Análise da rentabilidade por unidade de negócio. Inclui LTV/CAC (ratio saudável > 3), contribuição marginal, payback period (tempo para recuperar o CAC) e margem por cliente. Essencial para escalar com saúde financeira." },
+    { q: "Qual a diferença entre Output e Outcome?", a: "Output é o que foi entregue (feature, página, código). Outcome é o resultado de negócio gerado (aumento de retenção, redução de churn). PMs focados em output entregam muito sem impacto. PMs excelentes gerenciam outcomes." },
+    { q: "O que é OKR e como funciona?", a: "Objectives and Key Results: framework de definição de metas criado no Google. O Objetivo é qualitativo e aspiracional. Os Key Results são mensuráveis (2-5 por objetivo). OKRs são trimestrais e devem ser ambiciosos (70% de atingimento já é sucesso)." },
+    { q: "O que é Value Proposition Canvas?", a: "Ferramenta que alinha o produto com o cliente. Lado cliente: jobs-to-be-done, dores e ganhos. Lado produto: produtos/serviços, aliviadores de dor e criadores de ganho. Fit ocorre quando há correspondência forte entre os dois lados." },
+    { q: "O que é o Sean Ellis Test?", a: "Pergunta-chave de PMF: 'Como você se sentiria se não pudesse mais usar este produto?' Respostas: Muito desapontado / Um pouco desapontado / Indiferente. Se >40% respondem 'muito desapontado', há sinal forte de PMF." },
+    { q: "O que é um Growth Loop?", a: "Mecanismo auto-reforçador onde o uso do produto gera crescimento adicional (diferente de funil linear). Exemplos: Dropbox (indicação → mais armazenamento → mais indicações), LinkedIn (conexões → mais conexões visíveis → cadastros)." }
+  ],
+  dificil: [
+    { q: "O que é RAG (Retrieval-Augmented Generation)?", a: "Técnica que combina LLM com busca em base de conhecimento externa. O modelo busca documentos relevantes antes de responder, reduzindo alucinações e permitindo usar dados atualizados ou proprietários sem retreinar o modelo." },
+    { q: "O que são Embeddings em IA?", a: "Representações vetoriais numéricas de textos, imagens ou dados que capturam significado semântico. Textos semanticamente similares têm vetores próximos no espaço dimensional. Usados em busca semântica, recomendações e RAG." },
+    { q: "O que é Fine-tuning em LLMs e quando usar?", a: "Retreinamento de um modelo pré-treinado com dados específicos do domínio. Use quando o modelo precisa de estilo, terminologia ou formato consistente. Diferente de RAG (contexto dinâmico): fine-tuning bake conhecimento nos pesos." },
+    { q: "O que é Token Economics no contexto de LLMs?", a: "Análise de custo por token (input + output) para balancear qualidade da resposta, custo de inferência e latência. PM deve mapear: custo por sessão, tokens por request, modelos small vs. large por tarefa, caching strategies." },
+    { q: "O que é Red Teaming em IA e por que é crítico?", a: "Processo de testar adversarialmente um sistema de IA para identificar vulnerabilidades: prompt injection, jailbreak, vieses, respostas perigosas. Obrigatório antes de deploy em produção, especialmente em setores regulados como financeiro." },
+    { q: "Qual a diferença entre produto AI-first e AI-enhanced?", a: "AI-first: IA é o core value proposition, sem ela o produto não existe (ex: ChatGPT, Midjourney). AI-enhanced: IA melhora um produto existente sem ser o diferencial principal (ex: Gmail com autocomplete, Spotify com recomendações)." },
+    { q: "O que é PII Leakage em sistemas de IA?", a: "Exposição acidental de Informações de Identificação Pessoal via respostas de LLMs (dados vazaram no treino), prompts não sanitizados ou logs expostos. Mitigação: anonimização de dados de treino, guardrails, auditoria de outputs." },
+    { q: "Qual a diferença entre LGPD e GDPR na prática para PMs?", a: "LGPD (Brasil, 2020) é inspirada no GDPR (Europa, 2018). Diferenças práticas: LGPD tem base legal 'interesse legítimo' mais ampla; ANPD (fiscalizador BR) tem enforcement mais recente; GDPR tem multas maiores (4% do faturamento global)." },
+    { q: "O que é Overfitting em ML e como impacta produto?", a: "Modelo aprende padrões específicos do treino mas generaliza mal para dados novos. Em produto: alta acurácia em testes, baixa performance em produção. Mitigação: dados de validação separados, regularização, testes com dados out-of-distribution." },
+    { q: "O que é Explainability (XAI) e por que PMs de IA precisam se preocupar?", a: "Capacidade de explicar como e por que um modelo tomou uma decisão. Em setores regulados (financeiro, saúde), é requisito legal (LGPD, regulações do BC). Modelos caixa-preta podem ser inaceitáveis mesmo com alta acurácia." }
+  ]
+};
 
-let currentCard = 0;
-let isFlipped = false;
-const cardStatus = new Array(flashcards.length).fill('neutral');
+let currentDeck = [];
+let currentCardIndex = 0;
+let easyCards = [];
+let difficultCards = [];
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function selectDeck(level) {
+  currentDeck = shuffle(flashcardDecks[level]);
+  currentCardIndex = 0;
+  easyCards = [];
+  difficultCards = [];
+  document.getElementById('fc-deck-selector').style.display = 'none';
+  document.getElementById('fc-study-area').style.display = 'block';
+  const labels = { facil: '🟢 Fácil', intermediario: '🟡 Intermediário', dificil: '🔴 Difícil' };
+  const badge = document.getElementById('fc-deck-badge');
+  if (badge) badge.textContent = labels[level];
+  document.getElementById('fc-total').textContent = currentDeck.length;
+  renderCardList();
+  goToCard(0);
+}
+
+function showDeckSelector() {
+  document.getElementById('fc-deck-selector').style.display = 'block';
+  document.getElementById('fc-study-area').style.display = 'none';
+}
 
 function renderCardList() {
   const list = document.getElementById('cards-list');
-  list.innerHTML = flashcards.map((c, i) => `
-    <div onclick="goToCard(${i})" style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:${i===currentCard?'rgba(201,169,110,0.08)':'#2E2E2E'};border:1px solid ${i===currentCard?'#8B6914':'#333'};border-radius:8px;cursor:pointer;transition:all 0.2s">
-      <div style="width:8px;height:8px;border-radius:50%;flex-shrink:0;background:${cardStatus[i]==='easy'?'#5A9B6B':cardStatus[i]==='hard'?'#D85A30':'#3A3A3A'}"></div>
-      <div style="font-size:13px;color:${i===currentCard?'#C9A96E':'#8A8680'};line-height:1.4">${c.q}</div>
-    </div>
-  `).join('');
+  if (!list) return;
+  list.innerHTML = currentDeck.map((c, i) =>
+    `<div onclick="goToCard(${i})" id="cli-${i}" style="padding:10px 14px;border-radius:8px;cursor:pointer;border:1px solid #2E2E2E;background:${i===currentCardIndex?'rgba(201,169,110,0.1)':'transparent'};color:${i===currentCardIndex?'var(--gold)':'var(--muted)'};font-size:13px;transition:all 0.15s">${i+1}. ${c.q.substring(0,50)}${c.q.length>50?'...':''}</div>`
+  ).join('');
 }
 
-function goToCard(i) {
-  currentCard = i;
-  isFlipped = false;
-  document.getElementById('flashcard').classList.remove('flipped');
-  document.getElementById('card-question').textContent = flashcards[i].q;
-  document.getElementById('card-answer').textContent = flashcards[i].a;
-  document.getElementById('fc-current').textContent = i + 1;
+function goToCard(idx) {
+  currentCardIndex = idx;
+  const card = currentDeck[idx];
+  const qEl = document.getElementById('card-question');
+  const aEl = document.getElementById('card-answer');
+  if (qEl) qEl.textContent = card.q;
+  if (aEl) aEl.textContent = card.a;
+  const fc = document.getElementById('flashcard');
+  if (fc) fc.classList.remove('flipped');
+  document.getElementById('fc-current').textContent = idx + 1;
   renderCardList();
 }
 
 function flipCard() {
-  isFlipped = !isFlipped;
-  document.getElementById('flashcard').classList.toggle('flipped', isFlipped);
+  const fc = document.getElementById('flashcard');
+  if (fc) fc.classList.toggle('flipped');
 }
 
-function nextCard() { goToCard((currentCard + 1) % flashcards.length); }
-function prevCard() { goToCard((currentCard - 1 + flashcards.length) % flashcards.length); }
-function markEasy() { cardStatus[currentCard] = 'easy'; nextCard(); }
-function markDifficult() { cardStatus[currentCard] = 'hard'; nextCard(); }
+function nextCard() {
+  if (currentCardIndex < currentDeck.length - 1) goToCard(currentCardIndex + 1);
+}
 
-document.getElementById('fc-total').textContent = flashcards.length;
-goToCard(0);
+function prevCard() {
+  if (currentCardIndex > 0) goToCard(currentCardIndex - 1);
+}
 
-// QUIZ
-const questions = [
-  { q: "Uma startup recebe feedback de que 38% dos usuários ficariam 'muito desapontados' sem o produto. O que isso indica?", opts: ["PMF confirmado — pode escalar agora", "Próximo ao PMF mas ainda precisa iterar", "PMF atingido — 38% é suficiente", "O produto deve ser descontinuado"], correct: 1, explain: "O benchmark do Sean Ellis Test é 40%. Com 38%, o produto está próximo mas ainda precisa de iteração para atingir PMF de forma clara." },
-  { q: "Você está mapeando onde o usuário entende pela primeira vez o valor real do produto. Qual momento está buscando?", opts: ["WOW Moment", "Onboarding Moment", "AHA Moment", "Activation Event"], correct: 2, explain: "AHA Moment é o momento de compreensão do valor real. WOW é o encantamento inicial — diferente de entender o valor." },
-  { q: "Um sistema de IA precisa responder sobre documentos internos do Itaú. Para evitar alucinações com dados proprietários, qual técnica é mais indicada?", opts: ["Fine-tuning do modelo base", "RAG — Retrieval Augmented Generation", "Few-shot prompting", "Chain of Thought"], correct: 1, explain: "RAG permite que o LLM busque informações em bases de dados internas antes de responder, evitando alucinações e usando dados atualizados." },
-  { q: "Qual a principal diferença estratégica entre AI-first e AI-enhanced?", opts: ["AI-first usa mais GPU", "AI-enhanced é mais caro de desenvolver", "AI-first: IA é o core — sem ela o produto não existe. AI-enhanced: IA aprimora algo existente", "Não existe diferença prática entre os dois"], correct: 2, explain: "A distinção é estratégica: define riscos, dependências e a proposta de valor central do produto. Impacta decisões de build vs buy e go-to-market." },
-  { q: "Você precisa priorizar 5 features com recursos limitados. Qual framework analisa Impact, Confidence e Ease?", opts: ["SWOT", "ICE Score", "Lean Canvas", "STAR Method"], correct: 1, explain: "ICE Score = Impact × Confidence × Ease. Cada dimensão de 1 a 10 — o produto dá o ranking de prioridade." },
-  { q: "Qual das opções abaixo é um exemplo de métrica de vaidade?", opts: ["Taxa de retenção no Dia 30", "Número de pageviews sem correlação com conversão ou receita", "MTTD em observabilidade", "NPS acima de 50"], correct: 1, explain: "Pageviews sem correlação com conversão é métrica de vaidade — parece boa mas não informa decisão. As demais têm relação direta com valor de negócio." },
-  { q: "O que é Token Economics em produtos de IA generativa?", opts: ["Criptomoeda usada por LLMs", "Gestão do custo por chamada ao LLM — define pricing, margens e viabilidade em escala", "Framework de precificação para apps mobile", "Forma de medir engajamento em chatbots"], correct: 1, explain: "Token Economics é central para AI PMs: o custo por inferência define a viabilidade do modelo de negócio e informa decisões de pricing." },
-  { q: "O que é Red Teaming em produtos de IA?", opts: ["Equipe de engenharia de ML", "Processo de testar o modelo adversarialmente para encontrar falhas e vieses antes do lançamento", "Metodologia ágil para times de IA", "Framework de governança de dados"], correct: 1, explain: "Red Teaming é essencial em produtos regulados como bancos: simula ataques e uso indevido para identificar riscos antes que cheguem ao usuário real." }
-];
+function markEasy() {
+  if (!easyCards.includes(currentCardIndex)) easyCards.push(currentCardIndex);
+  nextCard();
+}
 
-let currentQ = 0, score = 0, answered = false;
-let timerInterval, seconds = 0;
+function markDifficult() {
+  if (!difficultCards.includes(currentCardIndex)) difficultCards.push(currentCardIndex);
+  nextCard();
+}
+
+// ===== QUIZ =====
+const questionPools = {
+  facil: [
+    { question: "Qual é a principal responsabilidade de um Product Manager?", options: ["Escrever código da aplicação", "Definir visão, prioridades e estratégia do produto", "Gerenciar contratos com fornecedores", "Aprovar orçamentos de marketing"], correct: 1, explanation: "O PM é responsável por definir o que construir e por quê, atuando como ponte entre negócio, tecnologia e design para maximizar o valor entregue." },
+    { question: "O que é o Business Model Canvas?", options: ["Um documento de requisitos técnicos", "Uma metodologia de desenvolvimento ágil", "Uma ferramenta visual com 9 blocos para modelar como um negócio cria valor", "Um template de apresentação para investidores"], correct: 2, explanation: "O BMC tem 9 blocos: Segmentos, Proposta de Valor, Canais, Relacionamentos, Receitas, Recursos, Atividades, Parcerias e Custos." },
+    { question: "O que significa Product Market Fit?", options: ["Quando o produto tem o design perfeito", "Quando o produto atingiu breakeven financeiro", "Quando o produto resolve um problema real que o mercado realmente quer", "Quando o produto está disponível em múltiplos mercados"], correct: 2, explanation: "PMF é o momento em que produto e mercado se encaixam — usuários precisam do produto, usam ativamente e recomendam espontaneamente." },
+    { question: "O que é NPS (Net Promoter Score)?", options: ["Um framework de priorização de backlog", "Uma métrica de lealdade baseada na probabilidade de recomendação", "Um método ágil de desenvolvimento", "Uma análise de custo de aquisição"], correct: 1, explanation: "NPS pergunta: 'De 0 a 10, você recomendaria?' Promotores (9-10) - Detratores (0-6) = NPS. Mede lealdade e satisfação de forma simples." },
+    { question: "O que é LTV (Lifetime Value)?", options: ["O custo de lançamento de um produto", "O valor total que um cliente gera durante todo o relacionamento", "A taxa de churn mensal", "O número de usuários ativos diários"], correct: 1, explanation: "LTV = Ticket Médio × Frequência × Tempo de Retenção. Junto com CAC, é a métrica fundamental para avaliar a saúde econômica de um negócio." },
+    { question: "O que é CAC (Customer Acquisition Cost)?", options: ["O número de clientes ativos no mês", "A taxa de conversão de leads em clientes", "O custo total para adquirir um novo cliente", "O valor médio por pedido"], correct: 2, explanation: "CAC = Investimento Total em Aquisição / Clientes Adquiridos. A referência saudável para SaaS é LTV/CAC > 3." },
+    { question: "O que é Product Discovery?", options: ["Criar o design final do produto antes do desenvolvimento", "Identificar e validar problemas e soluções antes de construí-los", "Lançar o produto no mercado-alvo", "Analisar o posicionamento dos concorrentes"], correct: 1, explanation: "Discovery reduz o risco de construir a coisa errada. Envolve pesquisa com usuários, protótipos e experimentos para validar hipóteses antes de investir em desenvolvimento." },
+    { question: "O que é um Roadmap de produto?", options: ["Um cronograma detalhado de sprints", "Um documento de especificação técnica de features", "Uma lista priorizada de bugs a corrigir", "Um plano estratégico que comunica a direção e objetivos do produto"], correct: 3, explanation: "O roadmap comunica intenção estratégica, não promessas de entrega. Deve evoluir conforme o aprendizado e alinhar stakeholders sobre prioridades." },
+    { question: "Qual método ajuda a identificar se um produto atingiu PMF?", options: ["Framework OKR", "Análise SWOT", "Sean Ellis Test (40% 'muito desapontados')", "Matriz BCG"], correct: 2, explanation: "Sean Ellis criou o benchmark: se >40% dos usuários responderem 'muito desapontados' ao imaginar a perda do produto, há sinal forte de PMF." },
+    { question: "O que significa 'churn' em produto?", options: ["Taxa de conversão de novos usuários", "Taxa de cancelamento ou perda de clientes em um período", "Velocidade de entrega de features", "Custo mensal de retenção de clientes"], correct: 1, explanation: "Churn é a taxa de perda de clientes ou receita em um período. Churn alto indica problemas de valor ou experiência. Para SaaS saudável, manter abaixo de 2% ao mês." },
+    { question: "O que é Lean Canvas?", options: ["Uma versão simplificada do Scrum Board", "Um tipo de análise financeira para startups", "Uma adaptação do BMC focada em startups com ênfase em problema e solução", "Uma ferramenta de gestão de equipes ágeis"], correct: 2, explanation: "Criado por Ash Maurya, o Lean Canvas substitui blocos do BMC por Problema, Solução, Métrica-chave e Vantagem Injusta — ideal para validar modelos de negócio em estágio inicial." },
+    { question: "O que são KPIs de produto?", options: ["Um tipo de metodologia ágil de desenvolvimento", "Um documento de planejamento estratégico anual", "Indicadores-chave de desempenho que medem progresso em direção a metas", "Uma técnica de entrevista qualitativa com usuários"], correct: 2, explanation: "KPIs (Key Performance Indicators) medem objetivamente se o produto está avançando em direção aos objetivos estratégicos. Devem ser específicos, mensuráveis e conectados ao negócio." }
+  ],
+  medio: [
+    { question: "O que o ICE Score avalia para priorização?", options: ["Influence, Cost, Execution", "Impact, Confidence, Ease", "Innovation, Complexity, Effort", "Income, Customer, Experience"], correct: 1, explanation: "ICE Score = Impact × Confidence × Ease, cada um de 1 a 10. Simples e rápido para priorizar quando há muitas ideias e dados limitados." },
+    { question: "Qual a diferença fundamental entre Output e Outcome?", options: ["Output é estratégia, Outcome é execução", "Output é o que foi entregue, Outcome é o resultado de negócio gerado", "Output é o usuário, Outcome é o produto", "Output é a meta, Outcome é o indicador"], correct: 1, explanation: "Um PM focado em output entrega features. Um PM focado em outcome pergunta: essa feature gerou retenção? Reduziu churn? PMs excelentes são responsabilizados por outcomes, não outputs." },
+    { question: "Quais são os 4 riscos de produto de Marty Cagan?", options: ["Custo, Tempo, Escopo, Qualidade", "Técnico, Legal, Financeiro, Operacional", "Valor, Usabilidade, Viabilidade técnica, Viabilidade de negócio", "Marketing, Vendas, Desenvolvimento, Suporte"], correct: 2, explanation: "O Discovery deve minimizar os 4 riscos antes do desenvolvimento: Valor (usuário quer?), Usabilidade (consegue usar?), Viabilidade técnica (conseguimos construir?) e Viabilidade de negócio (faz sentido?)." },
+    { question: "O que é o método Working Backwards da Amazon?", options: ["Uma técnica para revisar débito técnico no backlog", "Metodologia que começa pela press release do produto antes de construí-lo", "Um framework de repriorização de backlog por urgência", "Uma análise retroativa de decisões de produto"], correct: 1, explanation: "Working Backwards: escreva a press release e o FAQ do cliente antes de codificar. Força clareza sobre o valor para o cliente e evita construir a solução errada." },
+    { question: "O que mede Unit Economics?", options: ["O número de unidades vendidas por mês", "A produtividade da equipe de desenvolvimento", "A rentabilidade por unidade (LTV/CAC, contribuição marginal, payback)", "O custo de fabricação unitária de cada produto"], correct: 2, explanation: "Unit Economics mostra se o negócio é viável por unidade. LTV/CAC > 3, payback < 12 meses e contribuição marginal positiva são benchmarks saudáveis para SaaS." },
+    { question: "Qual é o sinal clássico de PMF pelo Sean Ellis Test?", options: [">70% dos usuários ativam no primeiro dia", "NPS acima de 50", "Mais de 40% ficariam 'muito desapontados' sem o produto", "Menos de 2% de churn mensal"], correct: 2, explanation: "Sean Ellis descobriu que produtos com PMF têm >40% de usuários que responderiam 'muito desapontado' se o produto sumisse. Esse benchmark virou padrão de mercado." },
+    { question: "O que é OKR e qual é sua principal característica?", options: ["Um tipo de análise de risco de produto", "Uma metodologia de design centrado no usuário", "Framework de metas com objetivo qualitativo e Key Results mensuráveis", "Uma técnica de estimativa de pontos de story"], correct: 2, explanation: "OKRs têm Objetivo (aspiracional, qualitativo) e Key Results (mensuráveis, 2-5 por objetivo). 70% de atingimento já é considerado sucesso — devem ser ambiciosos." },
+    { question: "RICE Score inclui qual fator que o ICE Score não tem?", options: ["Risco", "Reach (alcance)", "Relevância", "Retorno"], correct: 1, explanation: "RICE = Reach × Impact × Confidence / Effort. O Reach quantifica quantos usuários serão impactados, tornando o score mais preciso que o ICE para iniciativas com audiências muito diferentes." },
+    { question: "O que é um Growth Loop em produto?", options: ["Um processo de teste A/B iterativo", "Um ciclo de sprints focados em crescimento", "Mecanismo auto-reforçador onde o uso gera mais crescimento", "Um funil de conversão otimizado"], correct: 2, explanation: "Growth Loops são circulares: novos usuários geram conteúdo/convites/dados que atraem mais usuários. Diferente de funis lineares, são mais escaláveis e defensáveis." },
+    { question: "O que o Value Proposition Canvas alinha?", options: ["Equipe de produto com stakeholders", "Roadmap com budget disponível", "Jobs-to-be-done do cliente com produtos, aliviadores de dor e criadores de ganho", "Sprints com datas de lançamento"], correct: 2, explanation: "O Canvas tem dois lados: Cliente (jobs, dores, ganhos) e Produto (features, aliviadores, criadores). PMF acontece quando há forte alinhamento entre os dois lados." },
+    { question: "Qual afirmação sobre OKRs é correta?", options: ["Key Results devem ser atividades e tarefas", "Objetivos devem ser quantificáveis e numéricos", "Key Results devem ser mensuráveis e verificáveis ao final do ciclo", "OKRs são revisados apenas anualmente"], correct: 2, explanation: "Key Results são métricas concretas: 'aumentar retenção D30 de 40% para 55%'. Atividades são tasks, não KRs. OKRs são geralmente trimestrais." },
+    { question: "Qual é o principal objetivo da fase de Discovery?", options: ["Entregar features mais rápido que a concorrência", "Reduzir o número de bugs em produção", "Validar hipóteses sobre problema e solução antes de construir", "Aumentar o tamanho do time de produto"], correct: 2, explanation: "Discovery existe para reduzir o risco de desperdiçar desenvolvimento em soluções que ninguém quer. 'Fail fast, learn cheap' — validar antes de construir é mais barato que refatorar." }
+  ],
+  dificil: [
+    { question: "O que é RAG (Retrieval-Augmented Generation)?", options: ["Uma técnica de compressão de dados para LLMs", "Um tipo de modelo de linguagem menor e mais eficiente", "Combinação de LLM com busca em base de conhecimento para reduzir alucinações", "Um protocolo de comunicação entre agentes de IA"], correct: 2, explanation: "RAG: o modelo busca documentos relevantes em uma base vetorial antes de gerar a resposta. Permite usar dados atualizados ou proprietários sem retreinar o modelo, reduzindo alucinações." },
+    { question: "Qual a principal diferença entre Fine-tuning e RAG?", options: ["Fine-tuning modifica pesos do modelo; RAG adiciona contexto externo em runtime", "Fine-tuning é sempre mais rápido de implementar que RAG", "RAG é significativamente mais caro que Fine-tuning", "Fine-tuning é usado apenas para modelos de visão computacional"], correct: 0, explanation: "Fine-tuning 'bake' conhecimento nos pesos — bom para estilo e formato. RAG injeta contexto dinâmico no prompt — bom para dados que mudam frequentemente. Muitas arquiteturas combinam os dois." },
+    { question: "O que são Embeddings e qual seu uso em produto de IA?", options: ["Modelos de IA compactos para dispositivos móveis (edge)", "Representações vetoriais que capturam significado semântico para busca e similaridade", "Técnicas de compressão de prompts para reduzir tokens", "Parâmetros de configuração de temperatura de LLMs"], correct: 1, explanation: "Embeddings convertem texto/imagem em vetores numéricos onde similaridade semântica = proximidade vetorial. Base de RAG, busca semântica, detecção de duplicatas e sistemas de recomendação." },
+    { question: "O que é Token Economics no contexto de produtos com LLMs?", options: ["A economia de tokens de criptomoeda em plataformas de IA", "Análise do custo por token para balancear qualidade, custo e latência", "O sistema de pontuação de usuários em aplicativos de IA", "A quantidade de parâmetros em um modelo de linguagem"], correct: 1, explanation: "PMs de IA precisam entender: custo/token de input vs output, contexto window como recurso escasso, caching de prompts, escolha de modelo por task (small vs large) para otimizar UX e custo." },
+    { question: "O que é Red Teaming em IA e por que é crítico?", options: ["Um time de especialistas em design de interfaces de IA", "Um processo de code review para sistemas de machine learning", "Teste adversarial para identificar vulnerabilidades, vieses e comportamentos perigosos", "Uma metodologia de desenvolvimento de IA responsável certificada"], correct: 2, explanation: "Red Teaming testa o sistema como um atacante: prompt injection, jailbreak, respostas prejudiciais, vieses discriminatórios. Obrigatório antes de deploy em produção, especialmente em setores regulados." },
+    { question: "O que caracteriza um produto genuinamente 'AI-first'?", options: ["Usa IA apenas para personalizar recomendações de conteúdo", "Tem um chatbot integrado como canal de suporte", "A IA é o core value proposition — sem ela o produto não existe", "É desenvolvido e mantido por uma empresa focada em IA"], correct: 2, explanation: "AI-first: IA é o diferencial central (ChatGPT, Midjourney, GitHub Copilot). AI-enhanced: IA melhora um produto existente sem ser o core (Gmail autocomplete, Spotify Discover). A distinção importa para estratégia e pricing." },
+    { question: "O que é PII Leakage em sistemas de IA?", options: ["Vazamento de propriedade intelectual para empresas concorrentes", "Exposição acidental de informações pessoais via LLMs ou prompts não sanitizados", "Perda de dados de performance e métricas do modelo em produção", "Exposição não autorizada do código-fonte do modelo de IA"], correct: 1, explanation: "PII Leakage ocorre quando dados pessoais aparecem em outputs do LLM (memorização do treino) ou via prompts com dados de usuários não anonimizados. Risco crítico de conformidade com LGPD/GDPR." },
+    { question: "O que é Explainability (XAI) e por que PMs de IA se preocupam?", options: ["A capacidade de um modelo de aprender com poucos dados (few-shot)", "A velocidade de inferência de um modelo em produção", "A capacidade de explicar como e por que o modelo tomou uma decisão", "A precisão do modelo em dados de validação"], correct: 2, explanation: "Em setores regulados (financeiro, saúde), XAI é requisito legal. O Banco Central exige explicabilidade em decisões de crédito baseadas em modelos. Modelos caixa-preta podem ser inaceitáveis mesmo com alta acurácia." },
+    { question: "Qual a diferença entre LGPD e GDPR relevante para PMs?", options: ["LGPD aplica-se globalmente, GDPR apenas na Europa", "GDPR é uma lei mais recente que a LGPD brasileira", "LGPD é a lei brasileira similar ao GDPR europeu, com diferenças em enforcement e bases legais", "GDPR não exige consentimento explícito para tratamento de dados"], correct: 2, explanation: "LGPD (BR, 2020) foi inspirada no GDPR (EU, 2018). Diferenças: LGPD tem 'interesse legítimo' como base legal mais flexível; ANPD ainda amadurece; GDPR tem multas maiores (até 4% do faturamento global)." },
+    { question: "O que é Overfitting em ML e como impacta decisões de produto?", options: ["Quando o modelo é muito simples e não aprende padrões relevantes", "Quando o modelo aprende padrões do treino mas generaliza mal para dados novos", "Quando o modelo é treinado com volume de dados insuficiente", "Quando o modelo demora mais de 500ms para processar inferências"], correct: 1, explanation: "Overfitting: alta acurácia no treino, baixa em produção. Em produto: um modelo que funciona bem em demo pode falhar com usuários reais. Mitigue com dados de validação independentes e testes out-of-distribution." },
+    { question: "Um PM avalia incluir IA generativa em produto bancário. Principal preocupação de governança?", options: ["Custo de infraestrutura de GPU e inferência dos LLMs", "Tempo de resposta e latência do modelo em produção", "Explicabilidade das decisões, conformidade regulatória e prevenção de vieses", "Compatibilidade com sistemas legados do core bancário"], correct: 2, explanation: "No setor financeiro, regulações do BC e CMN exigem explicabilidade de decisões automáticas, auditabilidade, ausência de vieses discriminatórios e conformidade com LGPD. Governança precede features." },
+    { question: "O que é 'hallucination' em LLMs e como mitigar em produto?", options: ["Um modo de geração criativa intencionalmente ativado pelo usuário", "Quando o modelo gera informações plausíveis mas incorretas ou inventadas", "Uma técnica de ajuste de temperatura para respostas mais criativas", "Um erro de tokenização do input que causa respostas inesperadas"], correct: 1, explanation: "Alucinação: o modelo gera texto coerente mas factualmente errado com alta confiança. Mitigações: RAG com fontes verificadas, grounding em dados, temperature baixa para tasks factuais, human-in-the-loop para decisões críticas." },
+    { question: "Para produto de IA no setor financeiro, qual estratégia de deployment é mais adequada?", options: ["Deploy direto em produção para obter feedback real o mais rápido possível", "Beta aberto para todos os usuários simultaneamente", "Deploy gradual (canary/shadow mode) com monitoramento de viés e conformidade", "Deploy apenas em sandbox sem usuários reais indefinidamente"], correct: 2, explanation: "Canary/Shadow mode: o modelo roda em paralelo sem impactar decisões reais, permitindo monitorar vieses, erros e conformidade antes de habilitar para todos. Padrão de mercado para IA em setores regulados." }
+  ]
+};
+
+let currentQuizLevel = null;
+let quizQuestions = [];
+let currentQuestion = 0;
+let score = 0;
+let quizTimer = null;
+let timeLeft = 30;
+
+function showQuizSelector() {
+  document.getElementById('quiz-level-selector').style.display = 'block';
+  document.getElementById('quiz-play-area').style.display = 'none';
+  if (quizTimer) { clearInterval(quizTimer); quizTimer = null; }
+}
+
+function startQuiz(level) {
+  currentQuizLevel = level;
+  quizQuestions = shuffle(questionPools[level]).slice(0, 8);
+  currentQuestion = 0;
+  score = 0;
+  document.getElementById('quiz-level-selector').style.display = 'none';
+  document.getElementById('quiz-play-area').style.display = 'block';
+  const labels = { facil: '🟢 Fácil', medio: '🟡 Médio', dificil: '🔴 Difícil' };
+  document.getElementById('quiz-level-badge').textContent = labels[level];
+  document.getElementById('q-total').textContent = quizQuestions.length;
+  document.getElementById('quiz-result').style.display = 'none';
+  document.getElementById('quiz-container').style.display = 'block';
+  loadQuestion();
+  startTimer();
+}
 
 function startTimer() {
-  clearInterval(timerInterval);
-  seconds = 0;
-  timerInterval = setInterval(() => {
-    seconds++;
-    const m = Math.floor(seconds/60), s = seconds%60;
-    const el = document.getElementById('quiz-timer');
-    if(el) el.textContent = `⏱ ${m}:${s.toString().padStart(2,'0')}`;
+  timeLeft = 30;
+  updateTimerDisplay();
+  if (quizTimer) clearInterval(quizTimer);
+  quizTimer = setInterval(() => {
+    timeLeft--;
+    updateTimerDisplay();
+    if (timeLeft <= 0) {
+      clearInterval(quizTimer);
+      quizTimer = null;
+      selectAnswer(-1);
+    }
   }, 1000);
 }
 
+function updateTimerDisplay() {
+  const el = document.getElementById('quiz-timer');
+  if (el) el.textContent = '⏱ 0:' + (timeLeft < 10 ? '0' : '') + timeLeft;
+}
+
 function loadQuestion() {
-  answered = false;
-  const q = questions[currentQ];
-  document.getElementById('quiz-question').textContent = q.q;
-  document.getElementById('q-current').textContent = currentQ + 1;
-  document.getElementById('q-total').textContent = questions.length;
-  document.getElementById('quiz-progress-fill').style.width = ((currentQ+1)/questions.length*100) + '%';
-  document.getElementById('quiz-feedback').className = 'quiz-feedback';
-  document.getElementById('next-q-btn').style.display = 'none';
+  const q = quizQuestions[currentQuestion];
+  document.getElementById('quiz-question').textContent = q.question;
+  document.getElementById('q-current').textContent = currentQuestion + 1;
+  const fill = document.getElementById('quiz-progress-fill');
+  if (fill) fill.style.width = ((currentQuestion + 1) / quizQuestions.length * 100) + '%';
   const opts = document.getElementById('quiz-options');
-  opts.innerHTML = q.opts.map((o,i) => `
-    <button class="quiz-option" onclick="selectAnswer(${i})">
-      <span class="option-letter">${['A','B','C','D'][i]}</span>${o}
-    </button>
-  `).join('');
+  opts.innerHTML = q.options.map((o, i) =>
+    `<button class="quiz-option" onclick="selectAnswer(${i})" style="width:100%;text-align:left;padding:14px 18px;margin-bottom:10px;background:var(--onyx3);border:1px solid #2E2E2E;border-radius:10px;color:var(--cream);font-family:var(--font-body);font-size:14px;cursor:pointer;transition:all 0.15s" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="if(!this.disabled)this.style.borderColor='#2E2E2E'">${o}</button>`
+  ).join('');
+  document.getElementById('quiz-feedback').innerHTML = '';
+  document.getElementById('quiz-feedback').style.display = 'none';
+  document.getElementById('next-q-btn').style.display = 'none';
 }
 
 function selectAnswer(idx) {
-  if(answered) return;
-  answered = true;
-  const q = questions[currentQ];
-  document.querySelectorAll('.quiz-option').forEach((o, i) => {
-    if(i === q.correct) o.classList.add('correct');
-    else if(i === idx && idx !== q.correct) o.classList.add('wrong');
+  if (quizTimer) { clearInterval(quizTimer); quizTimer = null; }
+  const q = quizQuestions[currentQuestion];
+  const buttons = document.querySelectorAll('.quiz-option');
+  buttons.forEach((btn, i) => {
+    btn.disabled = true;
+    btn.style.onmouseover = null;
+    if (i === q.correct) {
+      btn.style.background = 'rgba(90,155,107,0.2)';
+      btn.style.borderColor = '#5A9B6B';
+      btn.style.color = '#5A9B6B';
+    } else if (i === idx) {
+      btn.style.background = 'rgba(216,90,48,0.15)';
+      btn.style.borderColor = '#D85A30';
+      btn.style.color = '#D85A30';
+    }
   });
-  if(idx === q.correct) score++;
-  const fb = document.getElementById('quiz-feedback');
-  fb.textContent = (idx === q.correct ? '✓ Correto! ' : '✗ Incorreto. ') + q.explain;
-  fb.className = 'quiz-feedback show ' + (idx === q.correct ? 'correct-fb' : 'wrong-fb');
-  document.getElementById('next-q-btn').style.display = 'block';
+  if (idx === q.correct) score++;
+  const feedback = document.getElementById('quiz-feedback');
+  feedback.style.display = 'block';
+  feedback.style.padding = '14px 18px';
+  feedback.style.borderRadius = '10px';
+  feedback.style.background = idx === q.correct ? 'rgba(90,155,107,0.1)' : 'rgba(216,90,48,0.1)';
+  feedback.style.border = '1px solid ' + (idx === q.correct ? 'rgba(90,155,107,0.3)' : 'rgba(216,90,48,0.3)');
+  feedback.style.color = 'var(--cream)';
+  feedback.style.fontSize = '13px';
+  feedback.style.lineHeight = '1.6';
+  feedback.style.marginTop = '8px';
+  feedback.innerHTML = `<strong style="color:${idx === q.correct ? '#5A9B6B' : '#D85A30'}">${idx === q.correct ? '✅ Correto!' : '❌ Incorreto.'}</strong> ${q.explanation}`;
+  document.getElementById('next-q-btn').style.display = 'inline-block';
 }
 
 function nextQuestion() {
-  currentQ++;
-  if(currentQ >= questions.length) {
-    clearInterval(timerInterval);
-    document.getElementById('quiz-container').style.display = 'none';
-    document.getElementById('next-q-btn').style.display = 'none';
-    document.getElementById('quiz-result').style.display = 'block';
-    document.getElementById('result-score').textContent = score + '/' + questions.length;
-    const pct = Math.round(score/questions.length*100);
-    document.getElementById('result-msg').textContent = pct >= 87 ? '🏆 Excelente! Você domina esses conceitos.' : pct >= 62 ? '📚 Bom progresso! Revise os temas que errou.' : '💡 Continue estudando — você está construindo a base.';
-  } else { loadQuestion(); }
+  currentQuestion++;
+  if (currentQuestion >= quizQuestions.length) {
+    showQuizResult();
+  } else {
+    loadQuestion();
+    startTimer();
+  }
+}
+
+function showQuizResult() {
+  document.getElementById('quiz-container').style.display = 'none';
+  document.getElementById('next-q-btn').style.display = 'none';
+  const result = document.getElementById('quiz-result');
+  result.style.display = 'block';
+  const pct = Math.round((score / quizQuestions.length) * 100);
+  document.getElementById('result-score').textContent = score + '/' + quizQuestions.length;
+  const msg = pct >= 80 ? '🏆 Excelente! Domínio sólido do tema.' : pct >= 60 ? '👍 Bom trabalho! Continue praticando.' : '📚 Continue estudando — você chegará lá!';
+  document.getElementById('result-msg').textContent = msg;
 }
 
 function restartQuiz() {
-  currentQ = 0; score = 0; answered = false;
-  document.getElementById('quiz-container').style.display = 'block';
-  document.getElementById('quiz-result').style.display = 'none';
-  loadQuestion(); startTimer();
+  if (currentQuizLevel) startQuiz(currentQuizLevel);
 }
 
-// ---- PROGRESS SYSTEM ----
-const ALL_LESSONS = ['fundamentos','pmf','discovery','estrategia','dados','diaadia','cultura','ia-fundamentos','base-tecnica','genai','seguranca','growth-ia'];
-const TOTAL = ALL_LESSONS.length;
-const completedSet = new Set();
-
-function markDone(lesson) {
-  if(completedSet.has(lesson)) return;
-  completedSet.add(lesson);
-
-  // Update confirm button
-  const btn = document.getElementById('btn-confirm-' + lesson);
-  if(btn) {
-    btn.textContent = '✓ Módulo concluído!';
-    btn.style.background = '#5A9B6B';
-    btn.style.cursor = 'default';
+// ===== PROGRESS =====
+function markDone(moduleId) {
+  const btn = document.getElementById('done-btn-' + moduleId);
+  if (btn) {
+    btn.textContent = '✅ Concluído';
     btn.disabled = true;
+    btn.style.opacity = '0.6';
+    btn.style.cursor = 'default';
   }
-
-  // Mark all topic checks in this lesson as done
-  document.querySelectorAll('[id^="tc-"]').forEach(el => {
-    if(el.id.includes(lesson.replace('-','').replace('ia','ia'))) {
-      el.classList.add('done');
-      el.textContent = '✓';
-    }
-  });
-
-  // Update nav badge
-  const badge = document.getElementById('badge-' + lesson);
-  if(badge) { badge.style.display = 'inline-block'; badge.classList.add('done'); }
-
-  // Update dashboard card
-  const tag = document.getElementById('card-tag-' + lesson);
-  if(tag && !tag.textContent.includes('Concluído')) tag.textContent += ' · Concluído';
-  const prog = document.getElementById('card-prog-' + lesson);
-  if(prog) prog.style.width = '100%';
-  const meta = document.getElementById('card-meta-' + lesson);
-  if(meta) meta.innerHTML = '<span class="status-dot"></span>&nbsp;Concluído';
-
   updateGlobalProgress();
 }
 
 function updateGlobalProgress() {
-  const done = completedSet.size;
-  const pct = Math.round(done / TOTAL * 100);
-  document.querySelector('.progress-bar-fill').style.width = pct + '%';
-  document.querySelector('.progress-pct').textContent = pct + '% concluído · ' + done + ' de ' + TOTAL + ' módulos';
-  const heroDone = document.getElementById('hero-done');
-  if(heroDone) heroDone.textContent = done;
+  const total = document.querySelectorAll('[id^="done-btn-"]').length;
+  const done = document.querySelectorAll('[id^="done-btn-"][disabled]').length;
+  const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+  const bar = document.getElementById('progress-bar');
+  const label = document.getElementById('progress-label');
+  if (bar) bar.style.width = pct + '%';
+  if (label) label.textContent = pct + '%';
 }
 
-function showScreen(name) {
+function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById('screen-' + name).classList.add('active');
-  const labels = { home:'Dashboard', flashcards:'Flashcards', quiz:'Quiz Interativo' };
-  document.getElementById('breadcrumb-active').textContent = labels[name] || name;
+  const screen = document.getElementById(id);
+  if (screen) screen.classList.add('active');
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  if(name === 'flashcards') renderCardList();
-  if(name === 'quiz') { restartQuiz(); }
-  window.scrollTo(0, 0);
+  const navItem = document.querySelector(`.nav-item[onclick*="${id}"]`);
+  if (navItem) navItem.classList.add('active');
 }
 
-function showLesson(name) {
-  const labels = {
-    fundamentos:'Fundamentos de PM', pmf:'Product Market Fit',
-    discovery:'Discovery & Design', estrategia:'Estratégia de Produto',
-    dados:'Dados & Analytics', diaadia:'Dia a Dia de Produto',
-    cultura:'Cultura de Produto', 'ia-fundamentos':'Fundamentos de IA',
-    'base-tecnica':'Base Técnica IA', genai:'GenAI no Produto',
-    seguranca:'Segurança & Compliance', 'growth-ia':'Estratégia & Growth IA'
-  };
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  const screen = document.getElementById('screen-' + name);
-  if(screen) screen.classList.add('active');
-  document.getElementById('breadcrumb-active').textContent = labels[name] || name;
-  // Highlight active nav
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  const navEl = document.getElementById('nav-' + name);
-  if(navEl) navEl.classList.add('active');
-  window.scrollTo(0, 0);
+function showLesson(moduleId) {
+  showScreen('screen-lessons');
+  setTimeout(() => {
+    const el = document.getElementById(moduleId);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }, 100);
 }
 
-function switchTab(showId, hideId, btn) {
-  document.getElementById(showId).style.display = 'block';
-  document.getElementById(hideId).style.display = 'none';
-  btn.parentElement.querySelectorAll('.template-tab').forEach(t => t.classList.remove('active'));
+function switchTab(btn, tabName) {
+  const panel = btn.closest('.module-card') || btn.closest('[class*="module"]') || btn.parentElement.parentElement;
+  if (panel) {
+    panel.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+    panel.querySelectorAll('.template-tab').forEach(t => t.classList.remove('active'));
+    const target = panel.querySelector(`.tab-content[data-tab="${tabName}"]`);
+    if (target) target.style.display = 'block';
+  }
   btn.classList.add('active');
 }
 
-loadQuestion();
-startTimer();
 updateGlobalProgress();
 </script>
+
 
   <!-- FOOTER -->
   <footer style="margin-left:260px;padding:32px 40px;border-top:1px solid #2A2A2A;display:flex;align-items:center;justify-content:space-between;background:var(--onyx2);">
