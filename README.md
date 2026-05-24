@@ -4,7 +4,7 @@ Plataforma de estudos pessoal desenvolvida por **Pricilla Cruz** para consolidar
 
 ## 🌐 Acesse o projeto
 
-**[→ pm-academy-pricruz.github.io](https://pricillacruz.github.io/pm-academy-pricruz)**
+**[→ pricillacruz.github.io/estudos_product_manager_priccru](https://pricillacruz.github.io/estudos_product_manager_priccru/pm_academy.html)**
 
 ---
 
