@@ -1,0 +1,49 @@
+# Windows system files
+NTUSER.DAT
+ntuser.dat.LOG*
+NTUSER.DAT{*.TxR.*
+NTUSER.DAT{*.TM.blf
+NTUSER.DAT{*.TMContainer*
+ntuser.ini
+*.blf
+*.regtrans-ms
+
+# Sensitive Windows folders
+AppData/
+Contacts/
+Favorites/
+Links/
+Music/
+Videos/
+Searches/
+Saved Games/
+IntelGraphicsProfiles/
+OneDrive/
+
+# Claude / IDE config
+.claude/
+.claude.json
+.antigravity/
+.antigravity-ide/
+.copilot/
+.gemini/
+.vscode/
+.vscode-shared/
+
+# Bash/Shell history
+.bash_history
+.lesshst
+
+# Cache
+.cache/
+
+# Git config
+.gitconfig
+
+# Windows registry
+.receitanet/
+.rfb/
+
+# Node
+package-lock.json
+node_modules/

@@ -1,0 +1,2269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PM Academy — Pricilla Souza</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #C9A96E;
+    --gold-light: #E8D5B0;
+    --gold-dark: #8B6914;
+    --onyx: #0E0E0E;
+    --onyx2: #1A1A1A;
+    --onyx3: #242424;
+    --onyx4: #2E2E2E;
+    --cream: #F5F0E8;
+    --cream2: #EDE6D6;
+    --white: #FDFCFA;
+    --muted: #8A8680;
+    --accent-blue: #4A7FA5;
+    --accent-teal: #3D8B7A;
+    --success: #5A9B6B;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html, body {
+    font-family: var(--font-body);
+    background: var(--onyx);
+    color: var(--cream);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    position: fixed;
+    left: 0; top: 0; bottom: 0;
+    width: 260px;
+    background: var(--onyx2);
+    border-right: 1px solid #2A2A2A;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    overflow-y: auto;
+  }
+
+  .sidebar-logo {
+    padding: 28px 24px 20px;
+    border-bottom: 1px solid #2A2A2A;
+  }
+
+  .logo-title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+  }
+
+  .logo-sub {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .sidebar-progress {
+    padding: 16px 24px;
+    border-bottom: 1px solid #2A2A2A;
+  }
+
+  .progress-label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .progress-bar-wrap {
+    background: var(--onyx4);
+    border-radius: 4px;
+    height: 4px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-dark), var(--gold));
+    border-radius: 4px;
+    transition: width 0.6s ease;
+  }
+
+  .progress-pct {
+    font-size: 12px;
+    color: var(--gold);
+    margin-top: 6px;
+  }
+
+  .nav-section {
+    padding: 16px 24px 8px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 24px;
+    cursor: pointer;
+    font-size: 13px;
+    color: #9A9590;
+    transition: all 0.2s;
+    border-left: 2px solid transparent;
+  }
+
+  .nav-item:hover {
+    color: var(--cream);
+    background: rgba(201,169,110,0.06);
+  }
+
+  .nav-item.active {
+    color: var(--gold);
+    border-left-color: var(--gold);
+    background: rgba(201,169,110,0.08);
+  }
+
+  .nav-item .nav-icon {
+    font-size: 15px;
+    width: 18px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .nav-badge {
+    margin-left: auto;
+    background: var(--gold-dark);
+    color: var(--gold-light);
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-weight: 500;
+  }
+
+  .nav-badge.done {
+    background: var(--success);
+    color: #D4F0DC;
+  }
+
+  .nav-divider {
+    height: 1px;
+    background: #2A2A2A;
+    margin: 8px 0;
+  }
+
+  /* MAIN */
+  .main {
+    margin-left: 260px;
+    min-height: 100vh;
+  }
+
+  /* TOPBAR */
+  .topbar {
+    height: 64px;
+    background: var(--onyx2);
+    border-bottom: 1px solid #2A2A2A;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .breadcrumb span.active-crumb {
+    color: var(--cream);
+    font-weight: 500;
+  }
+
+  .topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .btn-outline {
+    padding: 7px 18px;
+    border: 1px solid var(--gold-dark);
+    color: var(--gold);
+    background: transparent;
+    border-radius: 6px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-outline:hover {
+    background: rgba(201,169,110,0.1);
+  }
+
+  .btn-gold {
+    padding: 8px 20px;
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+    color: var(--onyx);
+    border: none;
+    border-radius: 6px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-gold:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  /* CONTENT */
+  .content { padding: 40px; }
+
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--onyx3) 0%, var(--onyx2) 100%);
+    border: 1px solid #2E2E2E;
+    border-radius: 16px;
+    padding: 48px;
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(201,169,110,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: 42px;
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+
+  .hero-title span { color: var(--gold); }
+
+  .hero-desc {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .stat-item { text-align: left; }
+
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--gold);
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+  }
+
+  /* MODULE GRID */
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+
+  .section-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+
+  .module-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  @media (max-width: 900px) {
+    .module-grid { grid-template-columns: repeat(2,1fr); }
+    .lesson-layout { grid-template-columns: 1fr; }
+    .sidebar { width: 220px; }
+    .main { margin-left: 220px; }
+  }
+
+  .module-card {
+    background: var(--onyx3);
+    border: 1px solid #2E2E2E;
+    border-radius: 12px;
+    padding: 24px;
+    cursor: pointer;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .module-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold-dark), var(--gold));
+    transform: scaleX(0);
+    transition: transform 0.3s;
+    transform-origin: left;
+  }
+
+  .module-card:hover {
+    border-color: var(--gold-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+
+  .module-card:hover::after { transform: scaleX(1); }
+
+  .module-tag {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 8px;
+  }
+
+  .module-title {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .module-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .module-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .module-progress-mini {
+    height: 3px;
+    background: var(--onyx4);
+    border-radius: 2px;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+
+  .module-progress-mini-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-dark), var(--gold));
+    border-radius: 2px;
+  }
+
+  .status-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--success);
+    display: inline-block;
+  }
+
+  /* LESSON LAYOUT */
+  .lesson-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 24px;
+  }
+
+  .concept-card {
+    background: var(--onyx3);
+    border: 1px solid #2E2E2E;
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 20px;
+  }
+
+  .concept-eyebrow {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .concept-title {
+    font-family: var(--font-display);
+    font-size: 26px;
+    color: var(--white);
+    margin-bottom: 14px;
+    line-height: 1.2;
+  }
+
+  .concept-body {
+    font-size: 14px;
+    color: #B0ABA4;
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+
+  .concept-highlight {
+    background: rgba(201,169,110,0.08);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+  }
+
+  .concept-highlight p {
+    font-size: 14px;
+    color: var(--gold-light);
+    line-height: 1.7;
+    font-style: italic;
+  }
+
+  .analogy-box {
+    background: var(--onyx4);
+    border: 1px solid #3A3A3A;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .analogy-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent-teal);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .analogy-text {
+    font-size: 13px;
+    color: var(--cream2);
+    line-height: 1.7;
+  }
+
+  .example-box {
+    background: var(--onyx4);
+    border: 1px solid #3A3A3A;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .example-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent-blue);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .tool-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .tool-card {
+    background: var(--onyx4);
+    border: 1px solid #3A3A3A;
+    border-radius: 8px;
+    padding: 16px;
+    transition: border-color 0.2s;
+  }
+
+  .tool-card:hover { border-color: var(--gold-dark); }
+
+  .tool-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--cream);
+    margin-bottom: 4px;
+  }
+
+  .tool-reason {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* SIDEBAR PANEL */
+  .sidebar-panel {
+    background: var(--onyx3);
+    border: 1px solid #2E2E2E;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+    position: sticky;
+    top: 84px;
+  }
+
+  .panel-title {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  .topic-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #2A2A2A;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .topic-item:last-child { border-bottom: none; }
+  .topic-item:hover .topic-text { color: var(--gold); }
+
+  .topic-check {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    border: 1px solid #3A3A3A;
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+  }
+
+  .topic-check.done {
+    background: var(--success);
+    border-color: var(--success);
+    color: white;
+  }
+
+  .topic-text {
+    font-size: 13px;
+    color: #9A9590;
+    line-height: 1.4;
+    transition: color 0.2s;
+  }
+
+  /* TEMPLATE */
+  .template-container {
+    background: var(--onyx3);
+    border: 1px solid #2E2E2E;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+
+  .template-header {
+    background: var(--onyx4);
+    padding: 14px 24px;
+    border-bottom: 1px solid #2E2E2E;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .template-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .template-tabs {
+    display: flex;
+    gap: 4px;
+  }
+
+  .template-tab {
+    padding: 5px 14px;
+    font-size: 11px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: var(--muted);
+    background: transparent;
+    border: 1px solid transparent;
+    font-family: var(--font-body);
+    transition: all 0.2s;
+  }
+
+  .template-tab.active {
+    color: var(--gold);
+    border-color: var(--gold-dark);
+    background: rgba(201,169,110,0.08);
+  }
+
+  .template-body { padding: 24px; }
+
+  .field-group { margin-bottom: 16px; }
+
+  .field-label {
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .field-value {
+    font-size: 13px;
+    color: var(--cream);
+    line-height: 1.6;
+    padding: 10px 14px;
+    background: var(--onyx4);
+    border-radius: 6px;
+    border: 1px solid #333;
+  }
+
+  .field-empty {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.6;
+    padding: 10px 14px;
+    background: var(--onyx);
+    border-radius: 6px;
+    border: 1px dashed #333;
+    font-style: italic;
+  }
+
+  /* FLASHCARD */
+  .flashcard-area {
+    perspective: 1000px;
+    margin-bottom: 20px;
+  }
+
+  .flashcard {
+    width: 100%;
+    height: 220px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+  }
+
+  .flashcard.flipped { transform: rotateY(180deg); }
+
+  .card-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    text-align: center;
+  }
+
+  .card-front {
+    background: var(--onyx3);
+    border: 1px solid var(--gold-dark);
+  }
+
+  .card-back {
+    background: linear-gradient(135deg, #1A2A1A, #1E2E1E);
+    border: 1px solid #3D8B7A;
+    transform: rotateY(180deg);
+  }
+
+  .card-type {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .card-question {
+    font-family: var(--font-display);
+    font-size: 20px;
+    color: var(--white);
+    line-height: 1.4;
+  }
+
+  .card-answer {
+    font-size: 14px;
+    color: #A0D8C8;
+    line-height: 1.7;
+  }
+
+  .card-hint {
+    position: absolute;
+    bottom: 16px;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .flashcard-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  .fc-counter { font-size: 12px; color: var(--muted); }
+
+  .fc-buttons { display: flex; gap: 8px; }
+
+  .fc-btn {
+    padding: 7px 16px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: var(--font-body);
+    border: 1px solid transparent;
+    transition: all 0.2s;
+  }
+
+  .fc-btn.next {
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+    color: var(--onyx);
+    font-weight: 500;
+  }
+
+  .fc-btn.skip {
+    background: transparent;
+    border-color: #3A3A3A;
+    color: var(--muted);
+  }
+
+  .fc-btn:hover { opacity: 0.85; }
+
+  /* QUIZ */
+  .quiz-container {
+    background: var(--onyx3);
+    border: 1px solid #2E2E2E;
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 20px;
+  }
+
+  .quiz-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  .quiz-counter { font-size: 12px; color: var(--muted); }
+  .quiz-timer { font-size: 13px; color: var(--gold); font-weight: 500; }
+
+  .quiz-progress {
+    height: 3px;
+    background: var(--onyx4);
+    border-radius: 2px;
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+
+  .quiz-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-dark), var(--gold));
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+  .quiz-question {
+    font-family: var(--font-display);
+    font-size: 20px;
+    color: var(--white);
+    line-height: 1.4;
+    margin-bottom: 24px;
+  }
+
+  .quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .quiz-option {
+    padding: 14px 18px;
+    background: var(--onyx4);
+    border: 1px solid #3A3A3A;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--cream2);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-align: left;
+    font-family: var(--font-body);
+    width: 100%;
+  }
+
+  .quiz-option:hover {
+    border-color: var(--gold-dark);
+    color: var(--cream);
+    background: rgba(201,169,110,0.05);
+  }
+
+  .quiz-option.correct {
+    border-color: var(--success);
+    background: rgba(90,155,107,0.1);
+    color: #A0D4AA;
+  }
+
+  .quiz-option.wrong {
+    border-color: #993C1D;
+    background: rgba(153,60,29,0.1);
+    color: #F0997B;
+  }
+
+  .option-letter {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    border: 1px solid currentColor;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+
+  .quiz-feedback {
+    margin-top: 16px;
+    padding: 14px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.6;
+    display: none;
+  }
+
+  .quiz-feedback.show { display: block; }
+
+  .quiz-feedback.correct-fb {
+    background: rgba(90,155,107,0.1);
+    border: 1px solid var(--success);
+    color: #A0D4AA;
+  }
+
+  .quiz-feedback.wrong-fb {
+    background: rgba(153,60,29,0.1);
+    border: 1px solid #993C1D;
+    color: #F0997B;
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #2E2E2E; border-radius: 2px; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+
+  .info-box {
+    border-radius: 10px;
+    padding: 18px;
+    border: 1px solid #3A3A3A;
+    background: var(--onyx4);
+  }
+
+  .info-box-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .info-box-text {
+    font-size: 13px;
+    color: var(--cream2);
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-title">PM Academy</div>
+    <div class="logo-sub">Plataforma de Estudos</div>
+  </div>
+
+  <div class="sidebar-progress">
+    <div class="progress-label">Progresso Geral</div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" style="width:28%"></div>
+    </div>
+    <div class="progress-pct">28% concluído · 4 de 14 módulos</div>
+  </div>
+
+  <div class="nav-section">Formação 01 — PM</div>
+  <div class="nav-item active" onclick="showScreen('home')">
+    <span class="nav-icon"><i class="ti ti-layout-dashboard"></i></span>Dashboard
+  </div>
+  <div class="nav-item" id="nav-fundamentos" onclick="showLesson('fundamentos')">
+    <span class="nav-icon"><i class="ti ti-circle-check"></i></span>Fundamentos de PM
+    <span class="nav-badge" id="badge-fundamentos" style="display:none">✓</span>
+  </div>
+  <div class="nav-item" id="nav-pmf" onclick="showLesson('pmf')">
+    <span class="nav-icon"><i class="ti ti-target"></i></span>Product Market Fit
+    <span class="nav-badge" id="badge-pmf" style="display:none">✓</span>
+  </div>
+  <div class="nav-item" id="nav-discovery" onclick="showLesson('discovery')">
+    <span class="nav-icon"><i class="ti ti-search"></i></span>Discovery & Design
+    <span class="nav-badge" id="badge-discovery" style="display:none">✓</span>
+  </div>
+  <div class="nav-item" id="nav-estrategia" onclick="showLesson('estrategia')">
+    <span class="nav-icon"><i class="ti ti-chess"></i></span>Estratégia de Produto
+    <span class="nav-badge" id="badge-estrategia" style="display:none">✓</span>
+  </div>
+  <div class="nav-item" id="nav-dados" onclick="showLesson('dados')">
+    <span class="nav-icon"><i class="ti ti-chart-bar"></i></span>Dados & Analytics
+    <span class="nav-badge" id="badge-dados" style="display:none">✓</span>
+  </div>
+  <div class="nav-item" id="nav-diaadia" onclick="showLesson('diaadia')">
+    <span class="nav-icon"><i class="ti ti-calendar"></i></span>Dia a Dia de Produto
+    <span class="nav-badge" id="badge-diaadia" style="display:none">✓</span>
+  </div>
+  <div class="nav-item" id="nav-cultura" onclick="showLesson('cultura')">
+    <span class="nav-icon"><i class="ti ti-users"></i></span>Cultura de Produto
+    <span class="nav-badge" id="badge-cultura" style="display:none">✓</span>
+  </div>
+
+  <div class="nav-divider"></div>
+  <div class="nav-section">Formação 02 — AI PM</div>
+  <div class="nav-item" id="nav-ia-fundamentos" onclick="showLesson('ia-fundamentos')">
+    <span class="nav-icon"><i class="ti ti-brain"></i></span>Fundamentos de IA
+    <span class="nav-badge" id="badge-ia-fundamentos" style="display:none">✓</span>
+  </div>
+  <div class="nav-item" id="nav-base-tecnica" onclick="showLesson('base-tecnica')">
+    <span class="nav-icon"><i class="ti ti-cpu"></i></span>Base Técnica IA
+    <span class="nav-badge" id="badge-base-tecnica" style="display:none">✓</span>
+  </div>
+  <div class="nav-item" id="nav-genai" onclick="showLesson('genai')">
+    <span class="nav-icon"><i class="ti ti-sparkles"></i></span>GenAI no Produto
+    <span class="nav-badge" id="badge-genai" style="display:none">✓</span>
+  </div>
+  <div class="nav-item" id="nav-seguranca" onclick="showLesson('seguranca')">
+    <span class="nav-icon"><i class="ti ti-shield-check"></i></span>Segurança & Compliance
+    <span class="nav-badge" id="badge-seguranca" style="display:none">✓</span>
+  </div>
+  <div class="nav-item" id="nav-growth-ia" onclick="showLesson('growth-ia')">
+    <span class="nav-icon"><i class="ti ti-trending-up"></i></span>Estratégia & Growth IA
+    <span class="nav-badge" id="badge-growth-ia" style="display:none">✓</span>
+  </div>
+
+  <div class="nav-divider"></div>
+  <div class="nav-item" onclick="showScreen('flashcards')">
+    <span class="nav-icon"><i class="ti ti-cards"></i></span>Flashcards
+  </div>
+  <div class="nav-item" onclick="showScreen('quiz')">
+    <span class="nav-icon"><i class="ti ti-help"></i></span>Quiz Interativo
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="topbar">
+    <div class="breadcrumb">
+      <span>PM Academy</span>
+      <i class="ti ti-chevron-right" style="font-size:12px"></i>
+      <span class="active-crumb" id="breadcrumb-active">Dashboard</span>
+    </div>
+    <div class="topbar-actions">
+      <button class="btn-outline" onclick="showScreen('flashcards')">⚡ Flashcards</button>
+      <button class="btn-gold" onclick="showScreen('quiz')">Fazer Quiz →</button>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- DASHBOARD -->
+    <div class="screen active" id="screen-home">
+      <div class="hero">
+        <div class="hero-eyebrow">Bem-vinda de volta, Pricilla</div>
+        <div class="hero-title">Sua jornada em<br><span>Product Management</span></div>
+        <div class="hero-desc">Formação completa em PM e AI Product Management. Cada módulo combina teoria, exemplos reais, templates e prática.</div>
+        <div class="hero-stats">
+          <div class="stat-item"><div class="stat-num">12</div><div class="stat-label">Módulos no total</div></div>
+          <div class="stat-item"><div class="stat-num">80+</div><div class="stat-label">Conceitos-chave</div></div>
+          <div class="stat-item"><div class="stat-num" id="hero-done">0</div><div class="stat-label">Módulos concluídos</div></div>
+          <div class="stat-item"><div class="stat-num">10</div><div class="stat-label">Flashcards disponíveis</div></div>
+        </div>
+      </div>
+
+      <div class="section-title">Formação 01 — Product Management</div>
+      <div class="section-sub">7 módulos · Do fundamento à cultura de produto</div>
+      <div class="module-grid">
+        <div class="module-card" id="card-fundamentos" onclick="showLesson('fundamentos')">
+          <div class="module-tag" id="card-tag-fundamentos">Módulo 01</div>
+          <div class="module-progress-mini"><div class="module-progress-mini-fill" id="card-prog-fundamentos" style="width:0%"></div></div>
+          <div class="module-title">Fundamentos de Product Management</div>
+          <div class="module-desc">Business Model Canvas, Lean Canvas, PMF, Unit Economics e mitigação de riscos.</div>
+          <div class="module-meta" id="card-meta-fundamentos"><i class="ti ti-lock" style="font-size:12px"></i>&nbsp;Não iniciado · 8 conceitos</div>
+        </div>
+        <div class="module-card" id="card-pmf" onclick="showLesson('pmf')">
+          <div class="module-tag" id="card-tag-pmf">Módulo 02</div>
+          <div class="module-progress-mini"><div class="module-progress-mini-fill" id="card-prog-pmf" style="width:0%"></div></div>
+          <div class="module-title">Product Market Fit</div>
+          <div class="module-desc">Como identificar, medir e atingir PMF. Métricas, validação e estratégias de crescimento.</div>
+          <div class="module-meta" id="card-meta-pmf"><i class="ti ti-lock" style="font-size:12px"></i>&nbsp;Não iniciado · 5 conceitos</div>
+        </div>
+        <div class="module-card" id="card-discovery" onclick="showLesson('discovery')">
+          <div class="module-tag" id="card-tag-discovery">Módulo 03</div>
+          <div class="module-progress-mini"><div class="module-progress-mini-fill" id="card-prog-discovery" style="width:0%"></div></div>
+          <div class="module-title">Product Discovery & Design</div>
+          <div class="module-desc">UX Fundamentals, pesquisa qualitativa, entrevistas, prototipação e testes.</div>
+          <div class="module-meta" id="card-meta-discovery"><i class="ti ti-lock" style="font-size:12px"></i>&nbsp;Não iniciado · 10 conceitos</div>
+        </div>
+        <div class="module-card" id="card-estrategia" onclick="showLesson('estrategia')">
+          <div class="module-tag" id="card-tag-estrategia">Módulo 04</div>
+          <div class="module-progress-mini"><div class="module-progress-mini-fill" id="card-prog-estrategia" style="width:0%"></div></div>
+          <div class="module-title">Estratégia de Produto</div>
+          <div class="module-desc">Visão, roadmap, release planning, SWOT e gestão de stakeholders.</div>
+          <div class="module-meta" id="card-meta-estrategia"><i class="ti ti-lock" style="font-size:12px"></i>&nbsp;Não iniciado · 8 conceitos</div>
+        </div>
+        <div class="module-card" id="card-dados" onclick="showLesson('dados')">
+          <div class="module-tag" id="card-tag-dados">Módulo 05</div>
+          <div class="module-progress-mini"><div class="module-progress-mini-fill" id="card-prog-dados" style="width:0%"></div></div>
+          <div class="module-title">Dados & Analytics</div>
+          <div class="module-desc">KPIs, métricas de produto, SQL, testes A/B e ferramentas analíticas.</div>
+          <div class="module-meta" id="card-meta-dados"><i class="ti ti-lock" style="font-size:12px"></i>&nbsp;Não iniciado · 9 conceitos</div>
+        </div>
+        <div class="module-card" id="card-diaadia" onclick="showLesson('diaadia')">
+          <div class="module-tag" id="card-tag-diaadia">Módulo 06</div>
+          <div class="module-progress-mini"><div class="module-progress-mini-fill" id="card-prog-diaadia" style="width:0%"></div></div>
+          <div class="module-title">Dia a Dia de Produto</div>
+          <div class="module-desc">Priorização, Working Backwards, Scrum, Kanban e Product Operations.</div>
+          <div class="module-meta" id="card-meta-diaadia"><i class="ti ti-lock" style="font-size:12px"></i>&nbsp;Não iniciado · 8 conceitos</div>
+        </div>
+        <div class="module-card" id="card-cultura" onclick="showLesson('cultura')">
+          <div class="module-tag" id="card-tag-cultura">Módulo 07</div>
+          <div class="module-progress-mini"><div class="module-progress-mini-fill" id="card-prog-cultura" style="width:0%"></div></div>
+          <div class="module-title">Cultura de Produto</div>
+          <div class="module-desc">Cultura orientada ao usuário, estruturação de times e cases Nubank, VTEX e Stripe.</div>
+          <div class="module-meta" id="card-meta-cultura"><i class="ti ti-lock" style="font-size:12px"></i>&nbsp;Não iniciado · 6 conceitos</div>
+        </div>
+      </div>
+
+      <div class="section-title">Formação 02 — AI Product Management</div>
+      <div class="section-sub">5 módulos · Da base técnica à estratégia de IA</div>
+      <div class="module-grid">
+        <div class="module-card" id="card-ia-fundamentos" onclick="showLesson('ia-fundamentos')">
+          <div class="module-tag" id="card-tag-ia-fundamentos">Módulo 01 · IA</div>
+          <div class="module-progress-mini"><div class="module-progress-mini-fill" id="card-prog-ia-fundamentos" style="width:0%"></div></div>
+          <div class="module-title">Fundamentos Estratégicos de IA</div>
+          <div class="module-desc">IA generativa, LLMs, AI PM, automação e métricas de IA.</div>
+          <div class="module-meta" id="card-meta-ia-fundamentos"><i class="ti ti-lock" style="font-size:12px"></i>&nbsp;Não iniciado · 10 conceitos</div>
+        </div>
+        <div class="module-card" id="card-base-tecnica" onclick="showLesson('base-tecnica')">
+          <div class="module-tag" id="card-tag-base-tecnica">Módulo 02 · IA</div>
+          <div class="module-progress-mini"><div class="module-progress-mini-fill" id="card-prog-base-tecnica" style="width:0%"></div></div>
+          <div class="module-title">Base Técnica para IA</div>
+          <div class="module-desc">Treinamento de modelos, CNNs, RNNs, Transformers, Fine-tuning e trade-offs.</div>
+          <div class="module-meta" id="card-meta-base-tecnica"><i class="ti ti-lock" style="font-size:12px"></i>&nbsp;Não iniciado · 9 conceitos</div>
+        </div>
+        <div class="module-card" id="card-genai" onclick="showLesson('genai')">
+          <div class="module-tag" id="card-tag-genai">Módulo 03 · IA</div>
+          <div class="module-progress-mini"><div class="module-progress-mini-fill" id="card-prog-genai" style="width:0%"></div></div>
+          <div class="module-title">GenAI Aplicada ao Produto</div>
+          <div class="module-desc">Prompt Engineering, RAG, Embeddings, Agentes IA e LangChain.</div>
+          <div class="module-meta" id="card-meta-genai"><i class="ti ti-lock" style="font-size:12px"></i>&nbsp;Não iniciado · 12 conceitos</div>
+        </div>
+        <div class="module-card" id="card-seguranca" onclick="showLesson('seguranca')">
+          <div class="module-tag" id="card-tag-seguranca">Módulo 04 · IA</div>
+          <div class="module-progress-mini"><div class="module-progress-mini-fill" id="card-prog-seguranca" style="width:0%"></div></div>
+          <div class="module-title">Segurança, Governança & Compliance</div>
+          <div class="module-desc">LGPD, GDPR, vieses em IA, Red Teaming e Alignment.</div>
+          <div class="module-meta" id="card-meta-seguranca"><i class="ti ti-lock" style="font-size:12px"></i>&nbsp;Não iniciado · 11 conceitos</div>
+        </div>
+        <div class="module-card" id="card-growth-ia" onclick="showLesson('growth-ia')">
+          <div class="module-tag" id="card-tag-growth-ia">Módulo 05 · IA</div>
+          <div class="module-progress-mini"><div class="module-progress-mini-fill" id="card-prog-growth-ia" style="width:0%"></div></div>
+          <div class="module-title">Estratégia, Growth e Liderança em IA</div>
+          <div class="module-desc">AI Readiness, Token Economics, Growth Loops e Go-to-market.</div>
+          <div class="module-meta" id="card-meta-growth-ia"><i class="ti ti-lock" style="font-size:12px"></i>&nbsp;Não iniciado · 10 conceitos</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LESSON: FUNDAMENTOS DE PM -->
+    <div class="screen" id="screen-fundamentos">
+      <div class="lesson-layout">
+        <div>
+          <div class="concept-card">
+            <div class="concept-eyebrow">Módulo 01 · Conceito Central</div>
+            <div class="concept-title">O que é Product Management?</div>
+            <div class="concept-body">Product Management é a disciplina responsável por descobrir o produto certo a ser construído e garantir que ele seja entregue com sucesso. O PM não é o chefe do produto — é o responsável por <strong style="color:var(--gold-light)">conectar negócio, tecnologia e usuário</strong> em uma direção coerente, gerando valor real e sustentável.</div>
+            <div class="concept-highlight"><p>"The product manager is the CEO of the product. Not in authority, but in responsibility — owning the outcome, not the output." — Marty Cagan, INSPIRED</p></div>
+            <div class="analogy-box">
+              <div class="analogy-label"><i class="ti ti-building"></i> Analogia — Arquitetura</div>
+              <div class="analogy-text">O PM é como o arquiteto de um edifício. Ele não bate prego — ele define o projeto, garante que atende quem vai morar, respeita as normas da prefeitura (regulatório) e garante que a construtora (engenharia) tem tudo o que precisa para executar. A obra só tem sentido se o projeto for o certo para o terreno certo.</div>
+            </div>
+            <div class="example-box">
+              <div class="example-label"><i class="ti ti-building-bank"></i> Contexto Bancário — Itaú</div>
+              <div class="analogy-text" style="color:var(--cream2)">No Itaú, um PM de plataforma como Observabilidade não decide qual alert criar — ele garante que o time de engenharia entende <em>por que</em> aquele alert importa para a operação, como isso se conecta ao SLA do banco e qual o impacto no cliente final. A execução é da engenharia; a direção e o porquê são do PM.</div>
+            </div>
+          </div>
+
+          <div class="concept-card">
+            <div class="concept-eyebrow">Framework Central</div>
+            <div class="concept-title">Business Model Canvas</div>
+            <div class="concept-body">O BMC é uma ferramenta visual de 9 blocos que descreve como uma organização cria, entrega e captura valor. Permite enxergar o negócio inteiro em uma única página — essencial para o PM entender o contexto estratégico do seu produto.</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px">
+              <div class="info-box"><div class="info-box-label" style="color:var(--gold)">Parceiros-chave</div><div class="info-box-text">Quem são os parceiros e fornecedores que tornam o modelo viável?</div></div>
+              <div class="info-box"><div class="info-box-label" style="color:var(--accent-teal)">Atividades-chave</div><div class="info-box-text">O que a empresa precisa fazer muito bem para o modelo funcionar?</div></div>
+              <div class="info-box"><div class="info-box-label" style="color:var(--gold)">Proposta de Valor</div><div class="info-box-text">Qual problema você resolve? Qual valor entrega? Por que alguém pagaria?</div></div>
+              <div class="info-box"><div class="info-box-label" style="color:var(--accent-blue)">Relacionamento</div><div class="info-box-text">Como você se relaciona e retém seus clientes?</div></div>
+              <div class="info-box"><div class="info-box-label" style="color:var(--accent-teal)">Segmentos</div><div class="info-box-text">Para quem você cria valor? Quais os segmentos de clientes?</div></div>
+              <div class="info-box"><div class="info-box-label" style="color:var(--accent-blue)">Fontes de Receita</div><div class="info-box-text">Como o modelo gera caixa? Qual o modelo de monetização?</div></div>
+            </div>
+            <div class="analogy-box">
+              <div class="analogy-label"><i class="ti ti-map"></i> Analogia — Mapa da Cidade</div>
+              <div class="analogy-text">O BMC é como o mapa de uma cidade vista do alto. Você não vê cada rua em detalhe — você vê os bairros, as conexões principais, onde está o centro comercial, as zonas residenciais e industriais. Antes de projetar qualquer feature, o PM precisa saber em que "bairro do negócio" está operando.</div>
+            </div>
+          </div>
+
+          <div class="concept-card">
+            <div class="concept-eyebrow">Framework</div>
+            <div class="concept-title">Lean Canvas & Proposta de Valor</div>
+            <div class="concept-body">O Lean Canvas é uma versão do BMC adaptada para startups e produtos em fase inicial. Foca em <strong style="color:var(--gold-light)">problema, solução e métricas de sucesso</strong> — ideal para validar hipóteses antes de investir em construção.</div>
+            <div class="two-col" style="margin-bottom:20px">
+              <div class="info-box">
+                <div class="info-box-label" style="color:var(--gold)">Lean Canvas — Diferencial</div>
+                <div class="info-box-text">Substitui "Parceiros" por "Problema" e "Atividades" por "Solução". Força o PM a nomear claramente qual dor está resolvendo e para quem — antes de qualquer decisão técnica.</div>
+              </div>
+              <div class="info-box">
+                <div class="info-box-label" style="color:var(--accent-teal)">Proposta de Valor</div>
+                <div class="info-box-text">A resposta para "por que alguém escolheria esse produto?" precisa ser clara, específica e defensável. Não é o que você faz — é o resultado que você entrega para o usuário certo.</div>
+              </div>
+            </div>
+            <div class="example-box">
+              <div class="example-label"><i class="ti ti-sparkles"></i> Case — Gympass (Wellhub)</div>
+              <div class="analogy-text" style="color:var(--cream2)">Lean Canvas do Gympass: <strong style="color:var(--cream)">Problema:</strong> academias ficam vazias em horários não-pico e funcionários não têm acesso acessível a bem-estar. <strong style="color:var(--cream)">Solução:</strong> B2B2C — empresa paga, funcionário usa qualquer academia. <strong style="color:var(--cream)">Proposta de Valor:</strong> saúde como benefício corporativo escalável. <strong style="color:var(--cream)">Métrica-chave:</strong> check-ins por usuário ativo.</div>
+            </div>
+          </div>
+
+          <div class="concept-card">
+            <div class="concept-eyebrow">Conceito Crítico</div>
+            <div class="concept-title">Unit Economics & Economic Fit</div>
+            <div class="concept-body">Unit Economics é a análise de rentabilidade por unidade — geralmente por cliente. Os dois indicadores centrais são <strong style="color:var(--gold-light)">LTV (Lifetime Value)</strong> e <strong style="color:var(--gold-light)">CAC (Customer Acquisition Cost)</strong>. Um negócio saudável tem LTV pelo menos 3x maior que o CAC.</div>
+            <div class="three-col" style="margin-bottom:16px">
+              <div style="background:var(--onyx4);border:1px solid #3A3A3A;border-radius:8px;padding:16px;text-align:center">
+                <div style="font-family:var(--font-display);font-size:26px;color:var(--gold)">LTV</div>
+                <div style="font-size:11px;color:var(--muted);margin-top:6px">Lifetime Value: receita total que um cliente gera durante todo o relacionamento com o produto</div>
+              </div>
+              <div style="background:var(--onyx4);border:1px solid #3A3A3A;border-radius:8px;padding:16px;text-align:center">
+                <div style="font-family:var(--font-display);font-size:26px;color:var(--accent-blue)">CAC</div>
+                <div style="font-size:11px;color:var(--muted);margin-top:6px">Customer Acquisition Cost: custo total para adquirir um novo cliente (marketing + vendas)</div>
+              </div>
+              <div style="background:var(--onyx4);border:1px solid #3A3A3A;border-radius:8px;padding:16px;text-align:center">
+                <div style="font-family:var(--font-display);font-size:26px;color:var(--accent-teal)">3:1</div>
+                <div style="font-size:11px;color:var(--muted);margin-top:6px">Razão saudável LTV/CAC. Abaixo de 3:1 o negócio queima caixa para crescer</div>
+              </div>
+            </div>
+            <div class="analogy-box">
+              <div class="analogy-label"><i class="ti ti-coffee"></i> Analogia — Cafeteria</div>
+              <div class="analogy-text">Imagine uma cafeteria que gasta R$50 em cupons para atrair um cliente novo. Se esse cliente compra apenas um café de R$8 e nunca volta, o negócio quebra. Mas se ele volta toda semana por 2 anos, o LTV é muito maior que o CAC de R$50. Unit Economics é entender esse ciclo antes de escalar o investimento em aquisição.</div>
+            </div>
+          </div>
+
+          <div class="concept-card">
+            <div class="concept-eyebrow">Conceito</div>
+            <div class="concept-title">Mitigação de Riscos em Produto</div>
+            <div class="concept-body">Todo produto carrega quatro tipos de risco que o PM precisa identificar e mitigar antes de investir em construção. Ignorar esses riscos é a principal causa de produtos que falham mesmo sendo bem executados tecnicamente.</div>
+            <div class="two-col" style="margin-bottom:16px">
+              <div class="info-box"><div class="info-box-label" style="color:#D85A30">Risco de Valor</div><div class="info-box-text">O usuário vai querer isso? Resolve um problema real? É o risco mais crítico e o mais ignorado.</div></div>
+              <div class="info-box"><div class="info-box-label" style="color:var(--accent-blue)">Risco de Usabilidade</div><div class="info-box-text">Os usuários conseguem usar sem fricção? Complexidade mata adoção mesmo em produtos com valor real.</div></div>
+              <div class="info-box"><div class="info-box-label" style="color:var(--accent-teal)">Risco de Viabilidade</div><div class="info-box-text">A engenharia consegue construir isso com os recursos disponíveis? Tecnicamente possível e factível?</div></div>
+              <div class="info-box"><div class="info-box-label" style="color:var(--gold)">Risco de Negócio</div><div class="info-box-text">Essa solução funciona para o modelo de negócio? Legal, regulatório, financeiro e estratégico.</div></div>
+            </div>
+            <div class="example-box">
+              <div class="example-label"><i class="ti ti-building-bank"></i> Aplicação — Produto Bancário</div>
+              <div class="analogy-text" style="color:var(--cream2)">No Itaú, um produto de Observabilidade com IA enfrenta: Risco de Valor (os times vão adotar?), Risco de Usabilidade (SREs vão conseguir usar sem treinamento?), Risco de Viabilidade (integrar com Datadog + Cloudwatch é factível?), Risco de Negócio (LGPD e regulatório do BC permitem os dados de log necessários?).</div>
+            </div>
+          </div>
+
+          <div class="template-container">
+            <div class="template-header">
+              <div class="template-label">Template — Lean Canvas</div>
+              <div class="template-tabs">
+                <button class="template-tab active" onclick="switchTab('fund-blank','fund-filled',this)">Em branco</button>
+                <button class="template-tab" onclick="switchTab('fund-filled','fund-blank',this)">Preenchido</button>
+              </div>
+            </div>
+            <div class="template-body">
+              <div id="fund-blank">
+                <div class="two-col">
+                  <div class="field-group"><div class="field-label">Problema (top 3)</div><div class="field-empty">Quais são os 3 maiores problemas do seu usuário?</div></div>
+                  <div class="field-group"><div class="field-label">Segmento de clientes</div><div class="field-empty">Quem é seu early adopter? Descreva com precisão.</div></div>
+                  <div class="field-group"><div class="field-label">Proposta de valor única</div><div class="field-empty">Por que esse produto para esse usuário? Em uma frase.</div></div>
+                  <div class="field-group"><div class="field-label">Solução (top 3 features)</div><div class="field-empty">Quais as 3 funcionalidades mínimas para resolver o problema?</div></div>
+                  <div class="field-group"><div class="field-label">Métricas-chave</div><div class="field-empty">Como você sabe que está progredindo? Qual número muda?</div></div>
+                  <div class="field-group"><div class="field-label">Vantagem injusta</div><div class="field-empty">O que você tem que ninguém pode copiar ou comprar facilmente?</div></div>
+                  <div class="field-group"><div class="field-label">Canais</div><div class="field-empty">Como você vai chegar até o cliente?</div></div>
+                  <div class="field-group"><div class="field-label">Fontes de receita / Custo</div><div class="field-empty">Como monetiza? Quais os maiores custos?</div></div>
+                </div>
+              </div>
+              <div id="fund-filled" style="display:none">
+                <div class="two-col">
+                  <div class="field-group"><div class="field-label">Problema (top 3)</div><div class="field-value">1. Times perdem tempo em múltiplas ferramentas durante incidentes. 2. Falta correlação automática entre logs, métricas e traces. 3. Dados de observabilidade não são contextualizados por serviço.</div></div>
+                  <div class="field-group"><div class="field-label">Segmento de clientes</div><div class="field-value">SREs, DevOps e PMs técnicos em empresas com arquitetura distribuída e mais de 50 serviços em produção.</div></div>
+                  <div class="field-group"><div class="field-label">Proposta de valor única</div><div class="field-value">Reduza o MTTD em 50% com correlação automática de observabilidade — sem configuração manual.</div></div>
+                  <div class="field-group"><div class="field-label">Solução (top 3 features)</div><div class="field-value">1. Painel unificado por serviço. 2. Correlação automática de sinais. 3. Alert contextualizado com causa raiz sugerida por IA.</div></div>
+                  <div class="field-group"><div class="field-label">Métricas-chave</div><div class="field-value">MTTD (Mean Time to Detect), adoção semanal por time, % de incidentes diagnosticados sem troca de ferramenta.</div></div>
+                  <div class="field-group"><div class="field-label">Vantagem injusta</div><div class="field-value">Integração nativa com stack interna do Itaú, dados históricos proprietários e contexto regulatório já mapeado.</div></div>
+                  <div class="field-group"><div class="field-label">Canais</div><div class="field-value">Rollout interno por squad, evangelização via Tech Leads, demos em incidents review e documentação no Confluence.</div></div>
+                  <div class="field-group"><div class="field-label">Fontes de receita / Custo</div><div class="field-value">Produto interno — ROI medido por redução de MTTD × custo/hora de incidente. Custo: infra cloud + manutenção da plataforma.</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CONFIRM BUTTON -->
+          <div id="confirm-fundamentos" style="background:var(--onyx3);border:1px solid #2E2E2E;border-radius:12px;padding:28px;margin-bottom:20px;text-align:center">
+            <div style="font-size:13px;color:var(--muted);margin-bottom:16px">Leu todo o conteúdo deste módulo?</div>
+            <button onclick="markDone('fundamentos')" id="btn-confirm-fundamentos" style="padding:12px 32px;background:linear-gradient(135deg,#8B6914,#C9A96E);color:#0E0E0E;border:none;border-radius:8px;font-family:var(--font-body);font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s;letter-spacing:0.5px">
+              ✓ Marcar módulo como concluído
+            </button>
+          </div>
+        </div>
+        <div>
+          <div class="sidebar-panel">
+            <div class="panel-title">Conceitos deste módulo</div>
+            <div class="topic-item"><div class="topic-check" id="tc-fund-1"></div><div class="topic-text">O que é Product Management</div></div>
+            <div class="topic-item"><div class="topic-check" id="tc-fund-2"></div><div class="topic-text">Business Model Canvas</div></div>
+            <div class="topic-item"><div class="topic-check" id="tc-fund-3"></div><div class="topic-text">Lean Canvas</div></div>
+            <div class="topic-item"><div class="topic-check" id="tc-fund-4"></div><div class="topic-text">Proposta de Valor</div></div>
+            <div class="topic-item"><div class="topic-check" id="tc-fund-5"></div><div class="topic-text">Product Market Fit (intro)</div></div>
+            <div class="topic-item"><div class="topic-check" id="tc-fund-6"></div><div class="topic-text">Economic Fit</div></div>
+            <div class="topic-item"><div class="topic-check" id="tc-fund-7"></div><div class="topic-text">Unit Economics</div></div>
+            <div class="topic-item"><div class="topic-check" id="tc-fund-8"></div><div class="topic-text">Mitigação de riscos</div></div>
+          </div>
+          <div class="sidebar-panel">
+            <div class="panel-title">Ferramentas recomendadas</div>
+            <div class="tool-card" style="margin-bottom:10px"><div class="tool-name">FigJam / Miro</div><div class="tool-reason">Montar e colaborar no Business Model Canvas e Lean Canvas visualmente com o time.</div></div>
+            <div class="tool-card" style="margin-bottom:10px"><div class="tool-name">Notion / Confluence</div><div class="tool-reason">Documentar a Proposta de Valor e Unit Economics do produto de forma versionada.</div></div>
+            <div class="tool-card"><div class="tool-name">Excel / Sheets</div><div class="tool-reason">Modelar Unit Economics: LTV, CAC, payback period e projeções de rentabilidade.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LESSON: PMF -->
+    <div class="screen" id="screen-pmf">
+      <div class="lesson-layout">
+        <div>
+          <div class="concept-card">
+            <div class="concept-eyebrow">Módulo 02 · Conceito Central</div>
+            <div class="concept-title">Product Market Fit</div>
+            <div class="concept-body">PMF acontece quando seu produto resolve um problema real de um mercado real, de forma que os usuários não apenas usam — eles <strong style="color:var(--gold-light)">não conseguem viver sem</strong>. É o ponto de inflexão onde o produto começa a crescer pela força do próprio valor gerado.</div>
+            <div class="concept-highlight"><p>"The only thing that matters is getting to product/market fit." — Marc Andreessen, 2007. Sem PMF, crescimento é ilusão. Com PMF, até uma estratégia imperfeita sobrevive.</p></div>
+            <div class="analogy-box">
+              <div class="analogy-label"><i class="ti ti-bulb"></i> Analogia — Corrida</div>
+              <div class="analogy-text">Imagine treinar para uma maratona com o tênis errado. Você pode chegar até o fim, mas com bolhas e dor. PMF é encontrar o tênis certo para o seu pé: quando você encaixa, a corrida flui naturalmente. Você não força o crescimento — ele acontece porque o produto foi feito exatamente para aquele corredor, aquele terreno.</div>
+            </div>
+            <div class="example-box">
+              <div class="example-label"><i class="ti ti-building"></i> Case Real — Nubank</div>
+              <div class="analogy-text" style="color:var(--cream2)">Nubank encontrou PMF ao oferecer um cartão de crédito sem anuidade, sem burocracia, com atendimento 100% digital para um público jovem que odiava bancos tradicionais. O sinal foi que usuários viraram advogados da marca — sem investimento em marketing, o crescimento via indicação explodiu.</div>
+            </div>
+          </div>
+
+          <div class="concept-card">
+            <div class="concept-eyebrow">Como medir PMF</div>
+            <div class="concept-title">Métricas e Sinais</div>
+            <div class="three-col" style="margin-bottom:16px">
+              <div style="background:var(--onyx4);border:1px solid #3A3A3A;border-radius:8px;padding:16px;text-align:center">
+                <div style="font-family:var(--font-display);font-size:28px;color:var(--gold)">40%</div>
+                <div style="font-size:11px;color:var(--muted);margin-top:4px">Sean Ellis Test: usuários que ficariam "muito desapontados" sem o produto</div>
+              </div>
+              <div style="background:var(--onyx4);border:1px solid #3A3A3A;border-radius:8px;padding:16px;text-align:center">
+                <div style="font-family:var(--font-display);font-size:28px;color:var(--accent-teal)">NPS</div>
+                <div style="font-size:11px;color:var(--muted);margin-top:4px">Net Promoter Score acima de 50 é forte sinal de PMF em produtos B2C</div>
+              </div>
+              <div style="background:var(--onyx4);border:1px solid #3A3A3A;border-radius:8px;padding:16px;text-align:center">
+                <div style="font-family:var(--font-display);font-size:28px;color:var(--accent-blue)">D30</div>
+                <div style="font-size:11px;color:var(--muted);margin-top:4px">Retenção no Dia 30. Um produto com PMF tem curva de retenção que estabiliza</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="template-container">
+            <div class="template-header">
+              <div class="template-label">Template — Canvas de PMF</div>
+              <div class="template-tabs">
+                <button class="template-tab active" onclick="switchTab('pmf-blank','pmf-filled',this)">Em branco</button>
+                <button class="template-tab" onclick="switchTab('pmf-filled','pmf-blank',this)">Preenchido</button>
+              </div>
+            </div>
+            <div class="template-body">
+              <div id="pmf-blank">
+                <div class="two-col">
+                  <div class="field-group"><div class="field-label">Segmento de usuário</div><div class="field-empty">Quem é seu usuário ideal? Qual o perfil?</div></div>
+                  <div class="field-group"><div class="field-label">Problema central</div><div class="field-empty">Qual dor real esse usuário sente hoje?</div></div>
+                  <div class="field-group"><div class="field-label">Solução atual do usuário</div><div class="field-empty">Como ele resolve hoje sem seu produto?</div></div>
+                  <div class="field-group"><div class="field-label">Proposta de valor única</div><div class="field-empty">Por que seu produto é melhor que a alternativa?</div></div>
+                  <div class="field-group"><div class="field-label">Sinal de PMF que você busca</div><div class="field-empty">Ex: 40% no Sean Ellis Test, retenção D30 > X%</div></div>
+                  <div class="field-group"><div class="field-label">Hipótese a validar</div><div class="field-empty">O que você precisa provar para afirmar que há PMF?</div></div>
+                </div>
+              </div>
+              <div id="pmf-filled" style="display:none">
+                <div class="two-col">
+                  <div class="field-group"><div class="field-label">Segmento de usuário</div><div class="field-value">Times de engenharia (SRE, DevOps, PMs técnicos) em empresas mid-large com stacks distribuídas</div></div>
+                  <div class="field-group"><div class="field-label">Problema central</div><div class="field-value">Perdem 30–60min durante incidentes buscando contexto de observabilidade em múltiplas ferramentas</div></div>
+                  <div class="field-group"><div class="field-label">Solução atual do usuário</div><div class="field-value">Abas abertas no Datadog, Cloudwatch e Kibana ao mesmo tempo, sem correlação automática</div></div>
+                  <div class="field-group"><div class="field-label">Proposta de valor única</div><div class="field-value">Um único painel contextualizado por serviço que correlaciona logs, métricas e traces automaticamente</div></div>
+                  <div class="field-group"><div class="field-label">Sinal de PMF que você busca</div><div class="field-value">40% dos usuários ficariam "muito desapontados" sem a ferramenta + redução de 50% no MTTD</div></div>
+                  <div class="field-group"><div class="field-label">Hipótese a validar</div><div class="field-value">Se o painel correlacionar automaticamente, times reduzem tempo de diagnóstico sem treinamento adicional</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CONFIRM BUTTON -->
+          <div id="confirm-pmf" style="background:var(--onyx3);border:1px solid #2E2E2E;border-radius:12px;padding:28px;margin-bottom:20px;text-align:center">
+            <div style="font-size:13px;color:var(--muted);margin-bottom:16px">Leu todo o conteúdo deste módulo?</div>
+            <button onclick="markDone('pmf')" id="btn-confirm-pmf" style="padding:12px 32px;background:linear-gradient(135deg,#8B6914,#C9A96E);color:#0E0E0E;border:none;border-radius:8px;font-family:var(--font-body);font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s;letter-spacing:0.5px">
+              ✓ Marcar módulo como concluído
+            </button>
+          </div>
+        </div>
+        <div>
+          <div class="sidebar-panel">
+            <div class="panel-title">Conceitos deste módulo</div>
+            <div class="topic-item"><div class="topic-check" id="tc-pmf-1"></div><div class="topic-text">O que é PMF</div></div>
+            <div class="topic-item"><div class="topic-check" id="tc-pmf-2"></div><div class="topic-text">Sean Ellis Test</div></div>
+            <div class="topic-item"><div class="topic-check" id="tc-pmf-3"></div><div class="topic-text">Métricas de PMF</div></div>
+            <div class="topic-item"><div class="topic-check" id="tc-pmf-4"></div><div class="topic-text">Validação de produto</div></div>
+            <div class="topic-item"><div class="topic-check" id="tc-pmf-5"></div><div class="topic-text">Estratégias de crescimento</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LESSON: DISCOVERY -->
+    <div class="screen" id="screen-discovery">
+      <div class="lesson-layout">
+        <div>
+          <div class="concept-card">
+            <div class="concept-eyebrow">Módulo 03 · Conceito Central</div>
+            <div class="concept-title">Product Discovery</div>
+            <div class="concept-body">Product Discovery é o processo contínuo de entender os problemas dos usuários, validar hipóteses e encontrar soluções viáveis <strong style="color:var(--gold-light)">antes</strong> de construir qualquer coisa. É o coração do trabalho de um PM — onde você descobre se está construindo a coisa certa, para as pessoas certas, da maneira certa.</div>
+            <div class="concept-highlight"><p>"Discovery não é uma fase. É uma mentalidade. Você nunca para de descobrir — você apenas aprende mais rápido com menos custo." — Teresa Torres</p></div>
+            <div class="analogy-box">
+              <div class="analogy-label"><i class="ti ti-building"></i> Analogia — Arquitetura Urbana</div>
+              <div class="analogy-text">Imagine um arquiteto que projeta uma praça pública. Antes de colocar um banco, ele observa onde as pessoas naturalmente param, sentam no chão, buscam sombra. <strong style="color:var(--cream)">Discovery é essa observação antes da construção.</strong> Você não pergunta "onde quer o banco?" — você observa o comportamento real e projeta a partir daí.</div>
+            </div>
+            <div class="example-box">
+              <div class="example-label"><i class="ti ti-building-bank"></i> Exemplo Real — Contexto Bancário</div>
+              <div class="analogy-text" style="color:var(--cream2)">No contexto de Observabilidade: antes de construir um novo dashboard para os times de engenharia, você faz Discovery entrevistando SREs, DevOps e PMs sobre quando e por que eles perdem tempo buscando informações de incidentes. A descoberta pode revelar que o problema não é falta de dados — é excesso de dados não contextualizados.</div>
+            </div>
+          </div>
+
+          <div class="concept-card">
+            <div class="concept-eyebrow">Conceitos do Módulo</div>
+            <div class="concept-title">WOW Moment vs AHA Moment</div>
+            <div class="two-col" style="margin-bottom:20px">
+              <div class="info-box">
+                <div class="info-box-label" style="color:var(--gold)">✨ WOW Moment</div>
+                <div class="info-box-text">A primeira impressão de encantamento — o usuário sente que o produto é especial. Acontece cedo, geralmente no onboarding.<br><br><span style="color:var(--muted);font-size:12px">Ex: A animação do Nubank ao abrir o cartão pela primeira vez.</span></div>
+              </div>
+              <div class="info-box">
+                <div class="info-box-label" style="color:var(--accent-teal)">💡 AHA Moment</div>
+                <div class="info-box-text">O momento em que o usuário entende o valor real do produto. É quando ele pensa "agora entendi por que isso existe para mim".<br><br><span style="color:var(--muted);font-size:12px">Ex: Primeira vez que o gasto é categorizado automaticamente.</span></div>
+              </div>
+            </div>
+            <div class="tool-grid">
+              <div class="tool-card"><div class="tool-name">Figma / FigJam</div><div class="tool-reason">Mapear jornadas e fluxos do usuário. Essencial para visualizar onde WOW e AHA acontecem.</div></div>
+              <div class="tool-card"><div class="tool-name">Hotjar</div><div class="tool-reason">Gravações de sessão e heatmaps. Mostra onde o usuário para, hesita ou abandona.</div></div>
+              <div class="tool-card"><div class="tool-name">Dovetail</div><div class="tool-reason">Centralizar e analisar entrevistas qualitativas. Identifica padrões de comportamento.</div></div>
+              <div class="tool-card"><div class="tool-name">Datadog / Mixpanel</div><div class="tool-reason">Confirmar com dados quantitativos onde os AHA moments correlacionam com retenção.</div></div>
+            </div>
+          </div>
+
+          <div class="template-container">
+            <div class="template-header">
+              <div class="template-label">Template — Roteiro de Entrevista</div>
+              <div class="template-tabs">
+                <button class="template-tab active" onclick="switchTab('disc-blank','disc-filled',this)">Em branco</button>
+                <button class="template-tab" onclick="switchTab('disc-filled','disc-blank',this)">Preenchido</button>
+              </div>
+            </div>
+            <div class="template-body">
+              <div id="disc-blank">
+                <div class="field-group"><div class="field-label">Objetivo da entrevista</div><div class="field-empty">Ex: Entender como o usuário descobre e usa [funcionalidade X]</div></div>
+                <div class="field-group"><div class="field-label">Pergunta de abertura (contexto)</div><div class="field-empty">Conte-me como é o seu dia a dia quando você precisa de...</div></div>
+                <div class="field-group"><div class="field-label">Pergunta de comportamento</div><div class="field-empty">Me mostra como você faz isso hoje. Pode compartilhar a tela?</div></div>
+                <div class="field-group"><div class="field-label">Pergunta de dor</div><div class="field-empty">O que é mais frustrante nesse processo? Por quê?</div></div>
+                <div class="field-group"><div class="field-label">Pergunta de impacto</div><div class="field-empty">O que acontece quando esse problema não é resolvido?</div></div>
+              </div>
+              <div id="disc-filled" style="display:none">
+                <div class="field-group"><div class="field-label">Objetivo da entrevista</div><div class="field-value">Entender como SREs e PMs consomem dados de observabilidade durante um incidente e onde perdem mais tempo.</div></div>
+                <div class="field-group"><div class="field-label">Pergunta de abertura</div><div class="field-value">"Me conta como foi a última vez que você investigou um incidente crítico. Qual foi o primeiro passo?"</div></div>
+                <div class="field-group"><div class="field-label">Pergunta de comportamento</div><div class="field-value">"Pode me mostrar onde você vai no Datadog quando precisa entender a causa raiz? Me mostra o fluxo real."</div></div>
+                <div class="field-group"><div class="field-label">Pergunta de dor</div><div class="field-value">"Qual parte desse processo é mais lenta ou frustrante? O que você gostaria de ter ali que não tem?"</div></div>
+                <div class="field-group"><div class="field-label">Pergunta de impacto</div><div class="field-value">"Quando esse problema acontece durante um incidente P1, qual o custo real pro time e pro negócio?"</div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CONFIRM BUTTON -->
+          <div id="confirm-discovery" style="background:var(--onyx3);border:1px solid #2E2E2E;border-radius:12px;padding:28px;margin-bottom:20px;text-align:center">
+            <div style="font-size:13px;color:var(--muted);margin-bottom:16px">Leu todo o conteúdo deste módulo?</div>
+            <button onclick="markDone('discovery')" id="btn-confirm-discovery" style="padding:12px 32px;background:linear-gradient(135deg,#8B6914,#C9A96E);color:#0E0E0E;border:none;border-radius:8px;font-family:var(--font-body);font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s;letter-spacing:0.5px">
+              ✓ Marcar módulo como concluído
+            </button>
+          </div>
+        </div>
+        <div>
+          <div class="sidebar-panel">
+            <div class="panel-title">Conceitos deste módulo</div>
+            <div class="topic-item"><div class="topic-check" id="tc-disc-1"></div><div class="topic-text">UX Fundamentals</div></div>
+            <div class="topic-item"><div class="topic-check" id="tc-disc-2"></div><div class="topic-text">Relação PM & UX</div></div>
+            <div class="topic-item"><div class="topic-check" id="tc-disc-3"></div><div class="topic-text">Pesquisa qualitativa</div></div>
+            <div class="topic-item"><div class="topic-check" id="tc-disc-4"></div><div class="topic-text">Product Discovery</div></div>
+            <div class="topic-item"><div class="topic-check" id="tc-disc-5"></div><div class="topic-text">Entrevistas com usuários</div></div>
+            <div class="topic-item"><div class="topic-check" id="tc-disc-6"></div><div class="topic-text">Jornada do usuário</div></div>
+            <div class="topic-item"><div class="topic-check" id="tc-disc-7"></div><div class="topic-text">Ideação & Prototipação</div></div>
+            <div class="topic-item"><div class="topic-check" id="tc-disc-8"></div><div class="topic-text">Testes de usabilidade</div></div>
+            <div class="topic-item"><div class="topic-check" id="tc-disc-9"></div><div class="topic-text">WOW Moments</div></div>
+            <div class="topic-item"><div class="topic-check" id="tc-disc-10"></div><div class="topic-text">AHA Moments</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LESSON: ESTRATEGIA -->
+    <div class="screen" id="screen-estrategia">
+      <div class="lesson-layout">
+        <div>
+          <div class="concept-card">
+            <div class="concept-eyebrow">Módulo 04 · Conceito Central</div>
+            <div class="concept-title">Estratégia de Produto</div>
+            <div class="concept-body">Estratégia de produto é a ponte entre a visão de longo prazo e as decisões do dia a dia. Ela define <strong style="color:var(--gold-light)">o que você vai construir, para quem, por quê e em que ordem</strong> — baseado em contexto de mercado, capacidade de execução e objetivos de negócio.</div>
+            <div class="concept-highlight"><p>"Uma boa estratégia não é uma lista de prioridades. É uma escolha clara sobre onde você vai jogar e como vai ganhar naquele campo." — Adaptado de Roger Martin</p></div>
+            <div class="analogy-box">
+              <div class="analogy-label"><i class="ti ti-city"></i> Analogia — Planejamento Urbano</div>
+              <div class="analogy-text">Estratégia de produto é como o plano diretor de uma cidade. Você não decide onde colocar cada semáforo — você define quais regiões vão crescer, que tipo de mobilidade vai priorizar e qual o perfil da cidade em 10 anos. O roadmap é o cronograma de obras. Os semáforos são as features.</div>
+            </div>
+          </div>
+          <div class="concept-card">
+            <div class="concept-eyebrow">Framework</div>
+            <div class="concept-title">Análise SWOT de Produto</div>
+            <div class="two-col">
+              <div style="background:rgba(90,155,107,0.08);border:1px solid rgba(90,155,107,0.3);border-radius:8px;padding:16px">
+                <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#5A9B6B;margin-bottom:8px">Forças (S)</div>
+                <div style="font-size:13px;color:var(--cream2);line-height:1.6">O que seu produto já faz melhor que qualquer alternativa? Onde você tem vantagem real?</div>
+              </div>
+              <div style="background:rgba(201,169,110,0.08);border:1px solid rgba(201,169,110,0.2);border-radius:8px;padding:16px">
+                <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px">Oportunidades (O)</div>
+                <div style="font-size:13px;color:var(--cream2);line-height:1.6">Tendências de mercado, mudanças regulatórias, gaps de concorrentes que você pode ocupar.</div>
+              </div>
+              <div style="background:rgba(74,127,165,0.08);border:1px solid rgba(74,127,165,0.2);border-radius:8px;padding:16px">
+                <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent-blue);margin-bottom:8px">Fraquezas (W)</div>
+                <div style="font-size:13px;color:var(--cream2);line-height:1.6">Onde seu produto ou time tem limitações que precisam ser gerenciadas ou mitigadas?</div>
+              </div>
+              <div style="background:rgba(153,60,29,0.08);border:1px solid rgba(153,60,29,0.2);border-radius:8px;padding:16px">
+                <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#D85A30;margin-bottom:8px">Ameaças (T)</div>
+                <div style="font-size:13px;color:var(--cream2);line-height:1.6">Concorrentes, mudanças tecnológicas, riscos regulatórios e fatores externos.</div>
+              </div>
+            </div>
+          </div>
+          <div class="template-container">
+            <div class="template-header">
+              <div class="template-label">Template — Visão de Produto</div>
+              <div class="template-tabs">
+                <button class="template-tab active" onclick="switchTab('est-blank','est-filled',this)">Em branco</button>
+                <button class="template-tab" onclick="switchTab('est-filled','est-blank',this)">Preenchido</button>
+              </div>
+            </div>
+            <div class="template-body">
+              <div id="est-blank">
+                <div class="field-group"><div class="field-label">Para quem</div><div class="field-empty">Qual é o seu usuário/cliente principal?</div></div>
+                <div class="field-group"><div class="field-label">Que precisa de</div><div class="field-empty">Qual é a necessidade ou problema central?</div></div>
+                <div class="field-group"><div class="field-label">Nosso produto é</div><div class="field-empty">Descrição em uma frase do que o produto faz</div></div>
+                <div class="field-group"><div class="field-label">Diferente de</div><div class="field-empty">Quais são as alternativas atuais?</div></div>
+                <div class="field-group"><div class="field-label">Nosso diferencial é</div><div class="field-empty">Por que somos a melhor escolha?</div></div>
+              </div>
+              <div id="est-filled" style="display:none">
+                <div class="field-group"><div class="field-label">Para quem</div><div class="field-value">Times de engenharia e operações em empresas com arquitetura distribuída e múltiplos serviços</div></div>
+                <div class="field-group"><div class="field-label">Que precisa de</div><div class="field-value">Visibilidade unificada e contextualizada do comportamento dos sistemas em tempo real</div></div>
+                <div class="field-group"><div class="field-label">Nosso produto é</div><div class="field-value">Uma plataforma de observabilidade que correlaciona automaticamente logs, métricas e traces por serviço</div></div>
+                <div class="field-group"><div class="field-label">Diferente de</div><div class="field-value">Datadog, Cloudwatch e New Relic, que exigem navegação manual entre múltiplas ferramentas</div></div>
+                <div class="field-group"><div class="field-label">Nosso diferencial é</div><div class="field-value">Correlação automática por contexto de serviço, reduzindo MTTD em 50% sem configuração adicional</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+          
+        <div>
+          
+          <!-- CONFIRM BUTTON -->
+          <div id="confirm-estrategia" style="background:var(--onyx3);border:1px solid #2E2E2E;border-radius:12px;padding:28px;margin-bottom:20px;text-align:center">
+            <div style="font-size:13px;color:var(--muted);margin-bottom:16px">Leu todo o conteúdo deste módulo?</div>
+            <button onclick="markDone('estrategia')" id="btn-confirm-estrategia" style="padding:12px 32px;background:linear-gradient(135deg,#8B6914,#C9A96E);color:#0E0E0E;border:none;border-radius:8px;font-family:var(--font-body);font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s;letter-spacing:0.5px">
+              ✓ Marcar módulo como concluído
+            </button>
+          </div>
+<div class="sidebar-panel">
+            <div class="panel-title">Conceitos deste módulo</div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Visão de produto</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Estratégia de produto</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Roadmap</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Release Planning</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Market Research</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">SWOT</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Gestão de stakeholders</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Buy-in executivo</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LESSON: DADOS -->
+    <div class="screen" id="screen-dados">
+      <div class="lesson-layout">
+        <div>
+          <div class="concept-card">
+            <div class="concept-eyebrow">Módulo 05 · Conceito Central</div>
+            <div class="concept-title">KPIs & Métricas de Produto</div>
+            <div class="concept-body">KPIs conectam comportamento do usuário com resultado de negócio. Diferente de métricas de vaidade, eles informam decisões e mostram se você está indo na direção estratégica certa.</div>
+            <div class="concept-highlight"><p>"Se você não consegue medir, não consegue gerenciar. Se não consegue gerenciar, não consegue melhorar." — Adaptado de Peter Drucker</p></div>
+            <div class="analogy-box">
+              <div class="analogy-label"><i class="ti ti-activity"></i> Analogia — Sinais Vitais</div>
+              <div class="analogy-text">KPIs são como os sinais vitais de um paciente: pressão arterial, frequência cardíaca, temperatura. Não são todos os dados do corpo — são os dados mais críticos para saber se o organismo está saudável. Métricas de vaidade são como medir o tamanho da orelha: é um dado, mas não diz nada sobre a saúde.</div>
+            </div>
+            <div class="tool-grid">
+              <div class="tool-card"><div class="tool-name">Datadog</div><div class="tool-reason">Métricas técnicas em tempo real. Ideal para times de plataforma e observabilidade.</div></div>
+              <div class="tool-card"><div class="tool-name">Power BI</div><div class="tool-reason">Dashboards executivos. Conecta dados de diferentes fontes em visão consolidada.</div></div>
+              <div class="tool-card"><div class="tool-name">Tableau</div><div class="tool-reason">Análise visual avançada. Excelente para explorar dados e encontrar padrões.</div></div>
+              <div class="tool-card"><div class="tool-name">SQL</div><div class="tool-reason">Consultar bases de dados diretamente. Indispensável para validar hipóteses com dados reais.</div></div>
+            </div>
+          </div>
+        </div>
+
+          
+        <div>
+          
+          <!-- CONFIRM BUTTON -->
+          <div id="confirm-dados" style="background:var(--onyx3);border:1px solid #2E2E2E;border-radius:12px;padding:28px;margin-bottom:20px;text-align:center">
+            <div style="font-size:13px;color:var(--muted);margin-bottom:16px">Leu todo o conteúdo deste módulo?</div>
+            <button onclick="markDone('dados')" id="btn-confirm-dados" style="padding:12px 32px;background:linear-gradient(135deg,#8B6914,#C9A96E);color:#0E0E0E;border:none;border-radius:8px;font-family:var(--font-body);font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s;letter-spacing:0.5px">
+              ✓ Marcar módulo como concluído
+            </button>
+          </div>
+<div class="sidebar-panel">
+            <div class="panel-title">Conceitos deste módulo</div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">KPIs</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Métricas de negócio</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Métricas de produto</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">SQL para PMs</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Data-driven decisions</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Testes A/B</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Analytics avançado</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Hotjar, New Relic, Tableau</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LESSON: DIA A DIA -->
+    <div class="screen" id="screen-diaadia">
+      <div class="lesson-layout">
+        <div>
+          <div class="concept-card">
+            <div class="concept-eyebrow">Módulo 06 · Conceito Central</div>
+            <div class="concept-title">Priorização & Metodologias Ágeis</div>
+            <div class="concept-body">O dia a dia de produto é sobre fazer escolhas difíceis com informação imperfeita. Priorizar bem é a habilidade mais crítica de um PM — e metodologias ágeis são o sistema operacional para entregar valor de forma contínua e adaptável.</div>
+            <div class="concept-highlight"><p>"Working Backwards: comece pela experiência do cliente desejada e trabalhe de trás para frente até a solução. Não o contrário." — Amazon</p></div>
+            <div class="analogy-box">
+              <div class="analogy-label"><i class="ti ti-chef-hat"></i> Analogia — Cozinha de Restaurante</div>
+              <div class="analogy-text">Um restaurante tem dezenas de pedidos ao mesmo tempo. O chef não prepara tudo na ordem que chegou — ele prioriza pelo tempo de preparo, mesa que espera há mais tempo e complexidade. Scrum é o sistema de fichas. Kanban é o quadro de pedidos. Priorização é a inteligência do chef que decide o que sai primeiro.</div>
+            </div>
+            <div class="two-col" style="margin-bottom:16px">
+              <div class="info-box"><div class="info-box-label" style="color:var(--gold)">ICE Score</div><div class="info-box-text"><strong>Impact × Confidence × Ease</strong><br>Framework rápido de priorização. Pontue cada dimensão de 1 a 10 e calcule o produto. O maior ICE Score vai primeiro.</div></div>
+              <div class="info-box"><div class="info-box-label" style="color:var(--accent-teal)">Working Backwards</div><div class="info-box-text"><strong>Comece pelo press release</strong><br>Escreva o press release do lançamento antes de qualquer linha de código. Define o "por quê" antes do "como".</div></div>
+            </div>
+          </div>
+        </div>
+
+          
+        <div>
+          
+          <!-- CONFIRM BUTTON -->
+          <div id="confirm-diaadia" style="background:var(--onyx3);border:1px solid #2E2E2E;border-radius:12px;padding:28px;margin-bottom:20px;text-align:center">
+            <div style="font-size:13px;color:var(--muted);margin-bottom:16px">Leu todo o conteúdo deste módulo?</div>
+            <button onclick="markDone('diaadia')" id="btn-confirm-diaadia" style="padding:12px 32px;background:linear-gradient(135deg,#8B6914,#C9A96E);color:#0E0E0E;border:none;border-radius:8px;font-family:var(--font-body);font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s;letter-spacing:0.5px">
+              ✓ Marcar módulo como concluído
+            </button>
+          </div>
+<div class="sidebar-panel">
+            <div class="panel-title">Conceitos deste módulo</div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Priorização</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Working Backwards</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Rollout</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Scrum</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Kanban</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Scrumban</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Product Operations</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Times de alta performance</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LESSON: CULTURA -->
+    <div class="screen" id="screen-cultura">
+      <div class="lesson-layout">
+        <div>
+          <div class="concept-card">
+            <div class="concept-eyebrow">Módulo 07 · Conceito Central</div>
+            <div class="concept-title">Cultura de Produto</div>
+            <div class="concept-body">Cultura de produto é o conjunto de valores, comportamentos e práticas que fazem um time construir produtos melhores de forma consistente. Não é o que está no slide de valores — é o que acontece quando ninguém está olhando.</div>
+            <div class="concept-highlight"><p>"Culture eats strategy for breakfast." — Peter Drucker. Uma cultura forte de produto é o que faz a estratégia ser executada todos os dias, mesmo sem supervisão direta.</p></div>
+            <div class="analogy-box">
+              <div class="analogy-label"><i class="ti ti-city"></i> Analogia — DNA Urbano</div>
+              <div class="analogy-text">Cultura é como o DNA de uma cidade. São Paulo e Amsterdam têm as mesmas necessidades básicas — transporte, moradia, comércio. Mas a forma como cada uma organiza e prioriza esses elementos cria personalidades completamente diferentes. Cultura de produto é esse DNA invisível que molda cada decisão.</div>
+            </div>
+            <div class="example-box">
+              <div class="example-label"><i class="ti ti-building"></i> Cases — Nubank, VTEX e Stripe</div>
+              <div class="analogy-text" style="color:var(--cream2)"><strong style="color:var(--cream)">Nubank:</strong> decisões orientadas ao cliente, transparência radical, autonomia dos times.<br><br><strong style="color:var(--cream)">VTEX:</strong> cultura de plataforma — produto pensado para o ecossistema, não só para o cliente direto.<br><br><strong style="color:var(--cream)">Stripe:</strong> documentação como produto, cultura de engenharia forte, API-first como filosofia.</div>
+            </div>
+          </div>
+        </div>
+
+          
+        <div>
+          
+          <!-- CONFIRM BUTTON -->
+          <div id="confirm-cultura" style="background:var(--onyx3);border:1px solid #2E2E2E;border-radius:12px;padding:28px;margin-bottom:20px;text-align:center">
+            <div style="font-size:13px;color:var(--muted);margin-bottom:16px">Leu todo o conteúdo deste módulo?</div>
+            <button onclick="markDone('cultura')" id="btn-confirm-cultura" style="padding:12px 32px;background:linear-gradient(135deg,#8B6914,#C9A96E);color:#0E0E0E;border:none;border-radius:8px;font-family:var(--font-body);font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s;letter-spacing:0.5px">
+              ✓ Marcar módulo como concluído
+            </button>
+          </div>
+<div class="sidebar-panel">
+            <div class="panel-title">Conceitos deste módulo</div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Cultura de produto</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Decisão orientada ao usuário</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Estruturação de times</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Processos de produto</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Cases Nubank, VTEX, Stripe</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Erros e acertos comuns</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LESSON: IA FUNDAMENTOS -->
+    <div class="screen" id="screen-ia-fundamentos">
+      <div class="lesson-layout">
+        <div>
+          <div class="concept-card">
+            <div class="concept-eyebrow">Formação 02 · Módulo 01</div>
+            <div class="concept-title">Fundamentos Estratégicos de IA</div>
+            <div class="concept-body">IA aplicada ao produto não é sobre substituir pessoas — é sobre <strong style="color:var(--gold-light)">aumentar a capacidade de decisão, velocidade de execução e qualidade da experiência</strong>. Um AI PM entende tanto as possibilidades técnicas quanto os limites e riscos da IA.</div>
+            <div class="concept-highlight"><p>"A vantagem competitiva sustentável não vem do modelo de IA — vem dos dados únicos, do loop de feedback e da integração com o fluxo do usuário."</p></div>
+            <div class="two-col" style="margin-bottom:20px">
+              <div class="info-box"><div class="info-box-label" style="color:var(--gold)">AI-first</div><div class="info-box-text">IA no centro da experiência. Sem IA, o produto não faz sentido.<br><br><span style="color:var(--muted);font-size:12px">Ex: ChatGPT, Midjourney, GitHub Copilot</span></div></div>
+              <div class="info-box"><div class="info-box-label" style="color:var(--accent-teal)">AI-enhanced</div><div class="info-box-text">IA aprimora um produto existente. Sem IA, o produto ainda funciona.<br><br><span style="color:var(--muted);font-size:12px">Ex: Notion IA, Grammarly, Gmail Smart Reply</span></div></div>
+            </div>
+            <div class="analogy-box">
+              <div class="analogy-label"><i class="ti ti-chef-hat"></i> Analogia — Cozinha e Automação</div>
+              <div class="analogy-text">AI-first é como um restaurante que só existe porque tem um robô chef. AI-enhanced é como um restaurante humano onde o robô lava as louças e faz os cálculos de estoque. Em ambos os casos a IA resolve um problema real — mas a dependência e o risco são diferentes.</div>
+            </div>
+          </div>
+        </div>
+
+          
+        <div>
+          
+          <!-- CONFIRM BUTTON -->
+          <div id="confirm-ia-fundamentos" style="background:var(--onyx3);border:1px solid #2E2E2E;border-radius:12px;padding:28px;margin-bottom:20px;text-align:center">
+            <div style="font-size:13px;color:var(--muted);margin-bottom:16px">Leu todo o conteúdo deste módulo?</div>
+            <button onclick="markDone('ia-fundamentos')" id="btn-confirm-ia-fundamentos" style="padding:12px 32px;background:linear-gradient(135deg,#8B6914,#C9A96E);color:#0E0E0E;border:none;border-radius:8px;font-family:var(--font-body);font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s;letter-spacing:0.5px">
+              ✓ Marcar módulo como concluído
+            </button>
+          </div>
+<div class="sidebar-panel">
+            <div class="panel-title">Conceitos deste módulo</div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">IA generativa</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Machine Learning</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Deep Learning</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">LLMs</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">AI PM vs PM tradicional</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">AI-first vs AI-enhanced</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Métricas de IA</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Carreira AI PM</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LESSON: BASE TECNICA -->
+    <div class="screen" id="screen-base-tecnica">
+      <div class="lesson-layout">
+        <div>
+          <div class="concept-card">
+            <div class="concept-eyebrow">Formação 02 · Módulo 02</div>
+            <div class="concept-title">Base Técnica para IA</div>
+            <div class="concept-body">Um AI PM não precisa programar modelos — mas precisa entender os trade-offs técnicos para tomar decisões melhores de produto, priorização e arquitetura de soluções de IA.</div>
+            <div class="concept-highlight"><p>"Um PM que entende a diferença entre overfitting e underfitting consegue questionar o modelo certo e defender o produto certo para o usuário certo."</p></div>
+            <div class="three-col" style="margin-bottom:16px">
+              <div class="info-box"><div class="info-box-label" style="color:var(--gold)">Overfitting</div><div class="info-box-text">Modelo "decorou" os dados de treino mas não generaliza. Performa mal em dados novos. É o modelo que "passou na prova mas não aprendeu".</div></div>
+              <div class="info-box"><div class="info-box-label" style="color:var(--accent-blue)">Underfitting</div><div class="info-box-text">Modelo muito simples, não captura os padrões do problema. É como estudar pouco — erra na prova e não generaliza.</div></div>
+              <div class="info-box"><div class="info-box-label" style="color:var(--accent-teal)">Fine-tuning</div><div class="info-box-text">Adaptar um modelo pré-treinado (ex: GPT) para uma tarefa específica com poucos dados. Mais eficiente que treinar do zero.</div></div>
+            </div>
+            <div class="analogy-box">
+              <div class="analogy-label"><i class="ti ti-school"></i> Analogia — Estudante</div>
+              <div class="analogy-text">Transformers são como estudantes com memória perfeita que conseguem prestar atenção em todo o contexto de uma vez. CNNs são como quem foca em padrões locais (ótimos para imagens — veem bordas, formas). RNNs são como quem lembra sequências — mas só do que veio antes.</div>
+            </div>
+          </div>
+        </div>
+
+          
+        <div>
+          
+          <!-- CONFIRM BUTTON -->
+          <div id="confirm-base-tecnica" style="background:var(--onyx3);border:1px solid #2E2E2E;border-radius:12px;padding:28px;margin-bottom:20px;text-align:center">
+            <div style="font-size:13px;color:var(--muted);margin-bottom:16px">Leu todo o conteúdo deste módulo?</div>
+            <button onclick="markDone('base-tecnica')" id="btn-confirm-base-tecnica" style="padding:12px 32px;background:linear-gradient(135deg,#8B6914,#C9A96E);color:#0E0E0E;border:none;border-radius:8px;font-family:var(--font-body);font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s;letter-spacing:0.5px">
+              ✓ Marcar módulo como concluído
+            </button>
+          </div>
+<div class="sidebar-panel">
+            <div class="panel-title">Conceitos deste módulo</div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Treinamento de modelos</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Overfitting / Underfitting</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">CNNs</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">RNNs</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Transformers</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Vision AI & OCR</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Fine-tuning</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">SaaS vs On-prem</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LESSON: GENAI -->
+    <div class="screen" id="screen-genai">
+      <div class="lesson-layout">
+        <div>
+          <div class="concept-card">
+            <div class="concept-eyebrow">Formação 02 · Módulo 03</div>
+            <div class="concept-title">GenAI Aplicada ao Produto</div>
+            <div class="concept-body">GenAI no produto vai além de adicionar um chatbot. Envolve entender RAG, Embeddings e Agentes para decidir <strong style="color:var(--gold-light)">quando usar, como usar e o que medir</strong>.</div>
+            <div class="concept-highlight"><p>"Prompt Engineering é a nova linguagem do produto. PMs que dominam isso conseguem prototipar e validar soluções de IA 10x mais rápido."</p></div>
+            <div class="three-col" style="margin-bottom:20px">
+              <div class="info-box"><div class="info-box-label" style="color:var(--gold)">RAG</div><div class="info-box-text">Retrieval Augmented Generation — IA que busca informação em fontes externas antes de responder. Evita alucinações com dados proprietários.</div></div>
+              <div class="info-box"><div class="info-box-label" style="color:var(--accent-teal)">Embeddings</div><div class="info-box-text">Representação numérica de texto que captura significado semântico. Permite busca por similaridade de conteúdo.</div></div>
+              <div class="info-box"><div class="info-box-label" style="color:var(--accent-blue)">Agentes IA</div><div class="info-box-text">IA que executa sequências de ações autonomamente usando ferramentas para atingir um objetivo complexo.</div></div>
+            </div>
+            <div class="analogy-box">
+              <div class="analogy-label"><i class="ti ti-building-library"></i> Analogia — Biblioteca vs Consultor</div>
+              <div class="analogy-text">Um LLM puro é como um consultor brilhante que estudou tudo até 2024 mas não tem acesso à internet. RAG é dar a esse consultor acesso à sua biblioteca interna durante a consulta. Embeddings são o sistema de indexação dessa biblioteca. Agentes são quando o consultor também pode fazer ligações e enviar emails por você.</div>
+            </div>
+          </div>
+        </div>
+
+          
+        <div>
+          
+          <!-- CONFIRM BUTTON -->
+          <div id="confirm-genai" style="background:var(--onyx3);border:1px solid #2E2E2E;border-radius:12px;padding:28px;margin-bottom:20px;text-align:center">
+            <div style="font-size:13px;color:var(--muted);margin-bottom:16px">Leu todo o conteúdo deste módulo?</div>
+            <button onclick="markDone('genai')" id="btn-confirm-genai" style="padding:12px 32px;background:linear-gradient(135deg,#8B6914,#C9A96E);color:#0E0E0E;border:none;border-radius:8px;font-family:var(--font-body);font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s;letter-spacing:0.5px">
+              ✓ Marcar módulo como concluído
+            </button>
+          </div>
+<div class="sidebar-panel">
+            <div class="panel-title">Conceitos deste módulo</div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Prompt Engineering</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Few-shot prompting</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Chain of Thought</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Function calling</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">RAG</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Embeddings & Vector Stores</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Agentes IA</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">LangChain / LangGraph</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Observabilidade de LLMs</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">LangSmith</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LESSON: SEGURANÇA -->
+    <div class="screen" id="screen-seguranca">
+      <div class="lesson-layout">
+        <div>
+          <div class="concept-card">
+            <div class="concept-eyebrow">Formação 02 · Módulo 04</div>
+            <div class="concept-title">Segurança, Governança e Compliance</div>
+            <div class="concept-body">Produtos de IA em escala — especialmente no setor financeiro — precisam de governança robusta. LGPD, GDPR, vieses algorítmicos e vazamento de dados são riscos que o AI PM precisa antecipar desde o design do produto.</div>
+            <div class="concept-highlight"><p>"Regulamentação não é inimiga da inovação — é o contorno dentro do qual você precisa ser criativo. PMs que entendem compliance constroem produtos mais duráveis."</p></div>
+            <div class="two-col" style="margin-bottom:16px">
+              <div class="info-box"><div class="info-box-label" style="color:#D85A30">LGPD / GDPR</div><div class="info-box-text">Leis de proteção de dados. Impactam como você coleta, armazena e processa dados de usuários em produtos de IA.</div></div>
+              <div class="info-box"><div class="info-box-label" style="color:var(--accent-blue)">Red Teaming</div><div class="info-box-text">Processo de testar o modelo adversarialmente — tentando explorar falhas, vieses e comportamentos inesperados antes do lançamento.</div></div>
+              <div class="info-box"><div class="info-box-label" style="color:var(--accent-teal)">PII Leakage</div><div class="info-box-text">Vazamento de Informações Pessoais Identificáveis pelo modelo. Risco crítico em LLMs treinados com dados de clientes.</div></div>
+              <div class="info-box"><div class="info-box-label" style="color:var(--gold)">Fairness</div><div class="info-box-text">Garantir que o modelo não discrimine grupos. Ferramentas como Fairlearn ajudam a medir e corrigir vieses algorítmicos.</div></div>
+            </div>
+          </div>
+        </div>
+
+          
+        <div>
+          
+          <!-- CONFIRM BUTTON -->
+          <div id="confirm-seguranca" style="background:var(--onyx3);border:1px solid #2E2E2E;border-radius:12px;padding:28px;margin-bottom:20px;text-align:center">
+            <div style="font-size:13px;color:var(--muted);margin-bottom:16px">Leu todo o conteúdo deste módulo?</div>
+            <button onclick="markDone('seguranca')" id="btn-confirm-seguranca" style="padding:12px 32px;background:linear-gradient(135deg,#8B6914,#C9A96E);color:#0E0E0E;border:none;border-radius:8px;font-family:var(--font-body);font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s;letter-spacing:0.5px">
+              ✓ Marcar módulo como concluído
+            </button>
+          </div>
+<div class="sidebar-panel">
+            <div class="panel-title">Conceitos deste módulo</div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">ETL / ELT</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Feature Stores</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Data Contracts</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Data Drift</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">LGPD / GDPR</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Fairness & Vieses</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Fairlearn</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">PII Leakage</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Red Teaming</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Alignment</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LESSON: GROWTH IA -->
+    <div class="screen" id="screen-growth-ia">
+      <div class="lesson-layout">
+        <div>
+          <div class="concept-card">
+            <div class="concept-eyebrow">Formação 02 · Módulo 05</div>
+            <div class="concept-title">Estratégia, Growth e Liderança em IA</div>
+            <div class="concept-body">Construir produtos de IA escaláveis exige pensar em maturidade organizacional, modelos de monetização específicos para IA e loops de crescimento que se retroalimentam com dados.</div>
+            <div class="concept-highlight"><p>"Token Economics não é só custo — é a lógica de valor do seu produto de IA. O PM que entende o custo por inferência consegue construir modelos de negócio sustentáveis."</p></div>
+            <div class="two-col" style="margin-bottom:16px">
+              <div class="info-box"><div class="info-box-label" style="color:var(--gold)">AI Maturity</div><div class="info-box-text">Nível de maturidade da organização em IA: do experimento isolado à IA como vantagem competitiva sistêmica.</div></div>
+              <div class="info-box"><div class="info-box-label" style="color:var(--accent-teal)">Token Economics</div><div class="info-box-text">Gestão do custo por chamada ao LLM. Define pricing, margens e viabilidade do produto de IA em escala.</div></div>
+              <div class="info-box"><div class="info-box-label" style="color:var(--accent-blue)">Growth Loops</div><div class="info-box-text">Loops onde o uso gera dados, que melhoram o modelo, que melhoram a experiência, que geram mais uso.</div></div>
+              <div class="info-box"><div class="info-box-label" style="color:#5A9B6B)">Buy vs Build</div><div class="info-box-text">Decisão estratégica: usar API de terceiros (OpenAI, Anthropic) ou treinar modelo próprio. Envolve custo, controle e risco.</div></div>
+            </div>
+          </div>
+        </div>
+
+          
+        <div>
+          
+          <!-- CONFIRM BUTTON -->
+          <div id="confirm-growth-ia" style="background:var(--onyx3);border:1px solid #2E2E2E;border-radius:12px;padding:28px;margin-bottom:20px;text-align:center">
+            <div style="font-size:13px;color:var(--muted);margin-bottom:16px">Leu todo o conteúdo deste módulo?</div>
+            <button onclick="markDone('growth-ia')" id="btn-confirm-growth-ia" style="padding:12px 32px;background:linear-gradient(135deg,#8B6914,#C9A96E);color:#0E0E0E;border:none;border-radius:8px;font-family:var(--font-body);font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s;letter-spacing:0.5px">
+              ✓ Marcar módulo como concluído
+            </button>
+          </div>
+<div class="sidebar-panel">
+            <div class="panel-title">Conceitos deste módulo</div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">AI Readiness</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">AI Maturity</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">AI-first vs AI-enhanced</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Buy vs Build</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Governance Boards</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Pricing GenAI</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Token Economics</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Growth Loops</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Go-to-market</div></div>
+            <div class="topic-item"><div class="topic-check"></div><div class="topic-text">Onboarding inteligente</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FLASHCARDS -->
+    <div class="screen" id="screen-flashcards">
+      <div class="hero" style="padding:32px 48px;margin-bottom:32px">
+        <div class="hero-eyebrow">Modo de Estudo</div>
+        <div class="hero-title" style="font-size:32px">Flashcards <span>Interativos</span></div>
+        <div class="hero-desc" style="margin-bottom:0">Clique no cartão para ver a resposta. Marque como fácil ou difícil para controlar sua revisão.</div>
+      </div>
+      <div style="max-width:640px;margin:0 auto">
+        <div class="flashcard-controls">
+          <div class="fc-counter">Cartão <span id="fc-current">1</span> de <span id="fc-total">10</span></div>
+          <div class="fc-buttons">
+            <button class="fc-btn skip" onclick="prevCard()">← Anterior</button>
+            <button class="fc-btn next" onclick="nextCard()">Próximo →</button>
+          </div>
+        </div>
+        <div class="flashcard-area">
+          <div class="flashcard" id="flashcard" onclick="flipCard()">
+            <div class="card-face card-front">
+              <div class="card-type">Pergunta</div>
+              <div class="card-question" id="card-question">...</div>
+              <div class="card-hint">Clique para ver a resposta</div>
+            </div>
+            <div class="card-face card-back">
+              <div class="card-type" style="color:#A0D8C8">Resposta</div>
+              <div class="card-answer" id="card-answer">...</div>
+              <div class="card-hint" style="color:#3D8B7A">Clique para voltar</div>
+            </div>
+          </div>
+        </div>
+        <div class="flashcard-controls">
+          <div></div>
+          <div class="fc-buttons">
+            <button class="fc-btn skip" onclick="markDifficult()">Difícil 🔴</button>
+            <button class="fc-btn next" onclick="markEasy()">Fácil ✓</button>
+          </div>
+        </div>
+        <div style="background:var(--onyx3);border:1px solid #2E2E2E;border-radius:12px;padding:20px;margin-top:24px">
+          <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:16px">Todos os flashcards</div>
+          <div id="cards-list" style="display:flex;flex-direction:column;gap:8px"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+    <div class="screen" id="screen-quiz">
+      <div class="hero" style="padding:32px 48px;margin-bottom:32px">
+        <div class="hero-eyebrow">Avaliação de Conhecimento</div>
+        <div class="hero-title" style="font-size:32px">Quiz <span>Interativo</span></div>
+        <div class="hero-desc" style="margin-bottom:0">Teste seu entendimento com perguntas contextualizadas para o universo de produto e IA.</div>
+      </div>
+      <div style="max-width:680px;margin:0 auto">
+        <div class="quiz-container" id="quiz-container">
+          <div class="quiz-header">
+            <div class="quiz-counter">Questão <span id="q-current">1</span> de <span id="q-total">8</span></div>
+            <div class="quiz-timer" id="quiz-timer">⏱ 0:00</div>
+          </div>
+          <div class="quiz-progress"><div class="quiz-progress-fill" id="quiz-progress-fill" style="width:12.5%"></div></div>
+          <div class="quiz-question" id="quiz-question">Carregando...</div>
+          <div class="quiz-options" id="quiz-options"></div>
+          <div class="quiz-feedback" id="quiz-feedback"></div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;margin-top:16px">
+          <button class="btn-gold" id="next-q-btn" onclick="nextQuestion()" style="display:none">Próxima questão →</button>
+        </div>
+        <div id="quiz-result" style="display:none">
+          <div class="concept-card" style="text-align:center;padding:48px">
+            <div style="font-family:var(--font-display);font-size:56px;color:var(--gold);margin-bottom:8px" id="result-score">0/8</div>
+            <div style="font-size:16px;color:var(--muted);margin-bottom:24px" id="result-msg">Calculando...</div>
+            <button class="btn-gold" onclick="restartQuiz()">Refazer quiz</button>
+            <button class="btn-outline" onclick="showScreen('home')" style="margin-left:12px">Voltar ao início</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const flashcards = [
+  { q: "O que é Product Market Fit?", a: "PMF é o ponto em que seu produto resolve um problema real de um mercado real, de forma que os usuários não conseguem viver sem ele. Sinal clássico: 40% ficariam 'muito desapontados' sem o produto (Sean Ellis Test)." },
+  { q: "Qual a diferença entre WOW Moment e AHA Moment?", a: "WOW Moment: primeiro encantamento emocional (ocorre no onboarding). AHA Moment: momento em que o usuário entende o valor real do produto. WOW acontece antes, AHA é o que converte e retém." },
+  { q: "O que é RAG em IA?", a: "Retrieval Augmented Generation: técnica que faz o LLM buscar informações em fontes externas antes de responder, reduzindo alucinações e permitindo usar dados atualizados ou proprietários." },
+  { q: "O que diferencia KPI de métrica de vaidade?", a: "KPIs conectam comportamento do usuário com resultado de negócio e informam decisões. Métricas de vaidade parecem boas (ex: pageviews sem correlação) mas não guiam ação estratégica." },
+  { q: "O que é Product Discovery?", a: "Processo contínuo de entender problemas do usuário, validar hipóteses e encontrar soluções antes de construir. Garante que você está construindo a coisa certa, para a pessoa certa." },
+  { q: "Qual a diferença entre AI-first e AI-enhanced?", a: "AI-first: IA é o núcleo do produto — sem ela, o produto não existe. AI-enhanced: IA melhora um produto existente que funciona sem ela. Ex: ChatGPT é AI-first; Gmail Smart Reply é AI-enhanced." },
+  { q: "O que são Embeddings em IA?", a: "Representações numéricas de texto (vetores) que capturam significado semântico. Permitem busca por similaridade — base do RAG e de sistemas de recomendação semântica." },
+  { q: "O que é Unit Economics?", a: "Análise da rentabilidade por unidade de negócio (geralmente por cliente: LTV vs CAC). Fundamental para entender se o modelo de negócio é sustentável antes de escalar." },
+  { q: "O que é Working Backwards?", a: "Metodologia da Amazon: escreva o press release do lançamento antes de qualquer linha de código. Define o 'por quê' e a experiência do cliente antes do 'como' técnico." },
+  { q: "O que é Red Teaming em IA?", a: "Processo de testar o modelo adversarialmente — tentando explorar falhas, vieses e comportamentos inesperados antes do lançamento. Essencial em produtos financeiros e regulados." }
+];
+
+let currentCard = 0;
+let isFlipped = false;
+const cardStatus = new Array(flashcards.length).fill('neutral');
+
+function renderCardList() {
+  const list = document.getElementById('cards-list');
+  list.innerHTML = flashcards.map((c, i) => `
+    <div onclick="goToCard(${i})" style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:${i===currentCard?'rgba(201,169,110,0.08)':'#2E2E2E'};border:1px solid ${i===currentCard?'#8B6914':'#333'};border-radius:8px;cursor:pointer;transition:all 0.2s">
+      <div style="width:8px;height:8px;border-radius:50%;flex-shrink:0;background:${cardStatus[i]==='easy'?'#5A9B6B':cardStatus[i]==='hard'?'#D85A30':'#3A3A3A'}"></div>
+      <div style="font-size:13px;color:${i===currentCard?'#C9A96E':'#8A8680'};line-height:1.4">${c.q}</div>
+    </div>
+  `).join('');
+}
+
+function goToCard(i) {
+  currentCard = i;
+  isFlipped = false;
+  document.getElementById('flashcard').classList.remove('flipped');
+  document.getElementById('card-question').textContent = flashcards[i].q;
+  document.getElementById('card-answer').textContent = flashcards[i].a;
+  document.getElementById('fc-current').textContent = i + 1;
+  renderCardList();
+}
+
+function flipCard() {
+  isFlipped = !isFlipped;
+  document.getElementById('flashcard').classList.toggle('flipped', isFlipped);
+}
+
+function nextCard() { goToCard((currentCard + 1) % flashcards.length); }
+function prevCard() { goToCard((currentCard - 1 + flashcards.length) % flashcards.length); }
+function markEasy() { cardStatus[currentCard] = 'easy'; nextCard(); }
+function markDifficult() { cardStatus[currentCard] = 'hard'; nextCard(); }
+
+document.getElementById('fc-total').textContent = flashcards.length;
+goToCard(0);
+
+// QUIZ
+const questions = [
+  { q: "Uma startup recebe feedback de que 38% dos usuários ficariam 'muito desapontados' sem o produto. O que isso indica?", opts: ["PMF confirmado — pode escalar agora", "Próximo ao PMF mas ainda precisa iterar", "PMF atingido — 38% é suficiente", "O produto deve ser descontinuado"], correct: 1, explain: "O benchmark do Sean Ellis Test é 40%. Com 38%, o produto está próximo mas ainda precisa de iteração para atingir PMF de forma clara." },
+  { q: "Você está mapeando onde o usuário entende pela primeira vez o valor real do produto. Qual momento está buscando?", opts: ["WOW Moment", "Onboarding Moment", "AHA Moment", "Activation Event"], correct: 2, explain: "AHA Moment é o momento de compreensão do valor real. WOW é o encantamento inicial — diferente de entender o valor." },
+  { q: "Um sistema de IA precisa responder sobre documentos internos do Itaú. Para evitar alucinações com dados proprietários, qual técnica é mais indicada?", opts: ["Fine-tuning do modelo base", "RAG — Retrieval Augmented Generation", "Few-shot prompting", "Chain of Thought"], correct: 1, explain: "RAG permite que o LLM busque informações em bases de dados internas antes de responder, evitando alucinações e usando dados atualizados." },
+  { q: "Qual a principal diferença estratégica entre AI-first e AI-enhanced?", opts: ["AI-first usa mais GPU", "AI-enhanced é mais caro de desenvolver", "AI-first: IA é o core — sem ela o produto não existe. AI-enhanced: IA aprimora algo existente", "Não existe diferença prática entre os dois"], correct: 2, explain: "A distinção é estratégica: define riscos, dependências e a proposta de valor central do produto. Impacta decisões de build vs buy e go-to-market." },
+  { q: "Você precisa priorizar 5 features com recursos limitados. Qual framework analisa Impact, Confidence e Ease?", opts: ["SWOT", "ICE Score", "Lean Canvas", "STAR Method"], correct: 1, explain: "ICE Score = Impact × Confidence × Ease. Cada dimensão de 1 a 10 — o produto dá o ranking de prioridade." },
+  { q: "Qual das opções abaixo é um exemplo de métrica de vaidade?", opts: ["Taxa de retenção no Dia 30", "Número de pageviews sem correlação com conversão ou receita", "MTTD em observabilidade", "NPS acima de 50"], correct: 1, explain: "Pageviews sem correlação com conversão é métrica de vaidade — parece boa mas não informa decisão. As demais têm relação direta com valor de negócio." },
+  { q: "O que é Token Economics em produtos de IA generativa?", opts: ["Criptomoeda usada por LLMs", "Gestão do custo por chamada ao LLM — define pricing, margens e viabilidade em escala", "Framework de precificação para apps mobile", "Forma de medir engajamento em chatbots"], correct: 1, explain: "Token Economics é central para AI PMs: o custo por inferência define a viabilidade do modelo de negócio e informa decisões de pricing." },
+  { q: "O que é Red Teaming em produtos de IA?", opts: ["Equipe de engenharia de ML", "Processo de testar o modelo adversarialmente para encontrar falhas e vieses antes do lançamento", "Metodologia ágil para times de IA", "Framework de governança de dados"], correct: 1, explain: "Red Teaming é essencial em produtos regulados como bancos: simula ataques e uso indevido para identificar riscos antes que cheguem ao usuário real." }
+];
+
+let currentQ = 0, score = 0, answered = false;
+let timerInterval, seconds = 0;
+
+function startTimer() {
+  clearInterval(timerInterval);
+  seconds = 0;
+  timerInterval = setInterval(() => {
+    seconds++;
+    const m = Math.floor(seconds/60), s = seconds%60;
+    const el = document.getElementById('quiz-timer');
+    if(el) el.textContent = `⏱ ${m}:${s.toString().padStart(2,'0')}`;
+  }, 1000);
+}
+
+function loadQuestion() {
+  answered = false;
+  const q = questions[currentQ];
+  document.getElementById('quiz-question').textContent = q.q;
+  document.getElementById('q-current').textContent = currentQ + 1;
+  document.getElementById('q-total').textContent = questions.length;
+  document.getElementById('quiz-progress-fill').style.width = ((currentQ+1)/questions.length*100) + '%';
+  document.getElementById('quiz-feedback').className = 'quiz-feedback';
+  document.getElementById('next-q-btn').style.display = 'none';
+  const opts = document.getElementById('quiz-options');
+  opts.innerHTML = q.opts.map((o,i) => `
+    <button class="quiz-option" onclick="selectAnswer(${i})">
+      <span class="option-letter">${['A','B','C','D'][i]}</span>${o}
+    </button>
+  `).join('');
+}
+
+function selectAnswer(idx) {
+  if(answered) return;
+  answered = true;
+  const q = questions[currentQ];
+  document.querySelectorAll('.quiz-option').forEach((o, i) => {
+    if(i === q.correct) o.classList.add('correct');
+    else if(i === idx && idx !== q.correct) o.classList.add('wrong');
+  });
+  if(idx === q.correct) score++;
+  const fb = document.getElementById('quiz-feedback');
+  fb.textContent = (idx === q.correct ? '✓ Correto! ' : '✗ Incorreto. ') + q.explain;
+  fb.className = 'quiz-feedback show ' + (idx === q.correct ? 'correct-fb' : 'wrong-fb');
+  document.getElementById('next-q-btn').style.display = 'block';
+}
+
+function nextQuestion() {
+  currentQ++;
+  if(currentQ >= questions.length) {
+    clearInterval(timerInterval);
+    document.getElementById('quiz-container').style.display = 'none';
+    document.getElementById('next-q-btn').style.display = 'none';
+    document.getElementById('quiz-result').style.display = 'block';
+    document.getElementById('result-score').textContent = score + '/' + questions.length;
+    const pct = Math.round(score/questions.length*100);
+    document.getElementById('result-msg').textContent = pct >= 87 ? '🏆 Excelente! Você domina esses conceitos.' : pct >= 62 ? '📚 Bom progresso! Revise os temas que errou.' : '💡 Continue estudando — você está construindo a base.';
+  } else { loadQuestion(); }
+}
+
+function restartQuiz() {
+  currentQ = 0; score = 0; answered = false;
+  document.getElementById('quiz-container').style.display = 'block';
+  document.getElementById('quiz-result').style.display = 'none';
+  loadQuestion(); startTimer();
+}
+
+// ---- PROGRESS SYSTEM ----
+const ALL_LESSONS = ['fundamentos','pmf','discovery','estrategia','dados','diaadia','cultura','ia-fundamentos','base-tecnica','genai','seguranca','growth-ia'];
+const TOTAL = ALL_LESSONS.length;
+const completedSet = new Set();
+
+function markDone(lesson) {
+  if(completedSet.has(lesson)) return;
+  completedSet.add(lesson);
+
+  // Update confirm button
+  const btn = document.getElementById('btn-confirm-' + lesson);
+  if(btn) {
+    btn.textContent = '✓ Módulo concluído!';
+    btn.style.background = '#5A9B6B';
+    btn.style.cursor = 'default';
+    btn.disabled = true;
+  }
+
+  // Mark all topic checks in this lesson as done
+  document.querySelectorAll('[id^="tc-"]').forEach(el => {
+    if(el.id.includes(lesson.replace('-','').replace('ia','ia'))) {
+      el.classList.add('done');
+      el.textContent = '✓';
+    }
+  });
+
+  // Update nav badge
+  const badge = document.getElementById('badge-' + lesson);
+  if(badge) { badge.style.display = 'inline-block'; badge.classList.add('done'); }
+
+  // Update dashboard card
+  const tag = document.getElementById('card-tag-' + lesson);
+  if(tag && !tag.textContent.includes('Concluído')) tag.textContent += ' · Concluído';
+  const prog = document.getElementById('card-prog-' + lesson);
+  if(prog) prog.style.width = '100%';
+  const meta = document.getElementById('card-meta-' + lesson);
+  if(meta) meta.innerHTML = '<span class="status-dot"></span>&nbsp;Concluído';
+
+  updateGlobalProgress();
+}
+
+function updateGlobalProgress() {
+  const done = completedSet.size;
+  const pct = Math.round(done / TOTAL * 100);
+  document.querySelector('.progress-bar-fill').style.width = pct + '%';
+  document.querySelector('.progress-pct').textContent = pct + '% concluído · ' + done + ' de ' + TOTAL + ' módulos';
+  const heroDone = document.getElementById('hero-done');
+  if(heroDone) heroDone.textContent = done;
+}
+
+function showScreen(name) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + name).classList.add('active');
+  const labels = { home:'Dashboard', flashcards:'Flashcards', quiz:'Quiz Interativo' };
+  document.getElementById('breadcrumb-active').textContent = labels[name] || name;
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  if(name === 'flashcards') renderCardList();
+  if(name === 'quiz') { restartQuiz(); }
+  window.scrollTo(0, 0);
+}
+
+function showLesson(name) {
+  const labels = {
+    fundamentos:'Fundamentos de PM', pmf:'Product Market Fit',
+    discovery:'Discovery & Design', estrategia:'Estratégia de Produto',
+    dados:'Dados & Analytics', diaadia:'Dia a Dia de Produto',
+    cultura:'Cultura de Produto', 'ia-fundamentos':'Fundamentos de IA',
+    'base-tecnica':'Base Técnica IA', genai:'GenAI no Produto',
+    seguranca:'Segurança & Compliance', 'growth-ia':'Estratégia & Growth IA'
+  };
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const screen = document.getElementById('screen-' + name);
+  if(screen) screen.classList.add('active');
+  document.getElementById('breadcrumb-active').textContent = labels[name] || name;
+  // Highlight active nav
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const navEl = document.getElementById('nav-' + name);
+  if(navEl) navEl.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function switchTab(showId, hideId, btn) {
+  document.getElementById(showId).style.display = 'block';
+  document.getElementById(hideId).style.display = 'none';
+  btn.parentElement.querySelectorAll('.template-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+loadQuestion();
+startTimer();
+updateGlobalProgress();
+</script>
+
+  <!-- FOOTER -->
+  <footer style="margin-left:260px;padding:32px 40px;border-top:1px solid #2A2A2A;display:flex;align-items:center;justify-content:space-between;background:var(--onyx2);">
+    <div>
+      <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:16px;color:var(--gold);margin-bottom:4px">Desenvolvido por Pricilla Cruz</div>
+      <div style="font-size:12px;color:var(--muted)">Product Manager Sênior · Itaú Unibanco · Para uso educacional pessoal</div>
+    </div>
+    <div style="display:flex;gap:16px;align-items:center">
+      <a href="https://www.linkedin.com/in/pricilla-souza/" target="_blank" rel="noopener noreferrer"
+         style="display:flex;align-items:center;gap:8px;padding:8px 18px;border:1px solid #2E6A9E;border-radius:8px;color:#5B9FD0;text-decoration:none;font-size:13px;transition:all 0.2s;"
+         onmouseover="this.style.background='rgba(91,159,208,0.1)'" onmouseout="this.style.background='transparent'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://github.com/pricillacruz" target="_blank" rel="noopener noreferrer"
+         style="display:flex;align-items:center;gap:8px;padding:8px 18px;border:1px solid #3A3A3A;border-radius:8px;color:#C9A96E;text-decoration:none;font-size:13px;transition:all 0.2s;"
+         onmouseover="this.style.background='rgba(201,169,110,0.1)'" onmouseout="this.style.background='transparent'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </footer>
+</body>
+</html>
